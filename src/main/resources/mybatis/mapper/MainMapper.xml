@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.rainaq.mypet.trudies.mapper.MainMapper">
+
+<!--    <resultMap id="mainBoard" type="com.rainaq.mypet.trudies.entity.MainBoard">-->
+<!--        <result property="boardId" column="board_id" />-->
+<!--        <result property="content" column="content" />-->
+<!--        <result property="userId" column="user_id" />-->
+<!--        <result property="imgName" column="img_Name" />-->
+<!--        <result property="mainLike" column="main_like" />-->
+<!--        <result property="mainReply" column="main_reply" />-->
+<!--    </resultMap>-->
+
+    <!-- test -->
+    <select id="getContent" resultType="java.lang.String">
+    SELECT content
+    FROM   main_board
+    WHERE  board_id = '1'
+    </select>
+
+    <insert id="insertBoard">
+        INSERT INTO main_board(content, user_id, img_Name, main_like, main_reply)
+        VALUE (#{content}, #{userId}, #{imgName}, '0', '0')
+    </insert>
+
+</mapper>

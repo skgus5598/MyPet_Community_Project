@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <link rel='stylesheet' href='css/woocommerce-layout.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' href='css/woocommerce.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='style.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+    </head>
+    <style>
+      .site-main img{
+            width: 100px;
+            height: 100px;
+        }
+    #main-title{
+        display: flex; 
+        background-color: red; 
+        width: 100%;
+        height: 100px;
+    }
+    .story-contents{
+        justify-content: center;
+        text-align: center;
+        background-color: aquamarine;
+        display: flex;
+        flex-wrap: wrap; /*행을 다 채우면 다음 행으로 개행*/
+        width: 100%;
+    }
+    .story-contents img{
+        width: 200px;
+        height: 200px;
+    }
+    .sContents{
+        border: 2px solid black;
+        margin-right: 30px;
+    }
+
+    </style>
+    <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
+        <div id="page" >
+            <div class="container" >
+                <header id="masthead" class="site-header">
+                <div class="site-branding" style="display: flex;">	
+                    <div>
+                        <h1 class="site-title"><a href="index.html" rel="home">Trudy</a></h1>
+                        <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
+                    </div>
+                    <div class="searchDiv">
+                        <input type="text">
+                        <button>search</button>
+                    </div>
+                    
+                </div>
+                <nav id="site-navigation" class="main-navigation" style="background-color: green;">
+                <button class="menu-toggle">Menu</button>
+                <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+                <div class="menu-menu-1-container">
+                    <ul id="menu-menu-1" class="menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="elements.html">Elements</a></li>
+                        <li><a href="#">Pages</a>
+                        <ul class="sub-menu">
+                            <li><a href="portfolio-item.html">Portfolio Item</a></li>
+                            <li><a href="blog-single.html">Blog Article</a></li>
+                            <li><a href="shop-single.html">Shop Item</a></li>
+                            <li><a href="portfolio-category.html">Portfolio Category</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                </nav>
+                </header>
+                <!-- #masthead -->
+                <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
+        <!--layoout Left-->				
+                    <div class="layout-left" style="background-color: aqua; width: 15%;">
+                        <li class="menubar">MENUBAR</li>
+                            <ul class="test">
+                                <li>testest</li>
+                                <li>testest</li>
+                                <li>testest</li>
+                            </ul>
+                    </div>	
+                    <!--추후 사이드 슬라이드로 만들기 -->		
+                    <script>
+                        $(".menubar").click(function(){
+                            if($(".test").is(":visible")){
+                                $(".test").slideUp();
+                            }else{
+                                $(".test").slideDown();
+                            }
+                        });
+                    
+                    </script>
+                    <div class="layout-main" style="background-color: yellow; width:75%;" >
+                        <div id="primary" class="content-area column full">
+                            <main id="main" class="site-main">
+                                <div id="main-title">
+                                    <div style="text-align: center;">                    
+                                        <a href="#">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                                        <b>STORY</b>  
+                                        </a>
+                                    </div>
+                                    <div style="text-align: center;">                    
+                                        <a href="#">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                                        <b>BOARD</b>  
+                                        </a>
+                                    </div>
+                                    <div style="text-align: center;">                    
+                                        <a href="#">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                                        <b>TRUDIES</b>  
+                                        </a>
+                                    </div>
+                                </div>
+                                <br><br>
+
+                                <span>
+                                    <h1>Things To Know</h1>
+                                    <hr>
+                                    <table>
+                                        <tr>
+                                            <td>What's wrong with my TRUDY!?</td>
+                                            <td>❤️ 24</td>
+                                            <td># 24</td>
+                                            <td>2022-01-01</td>
+                                        </tr>
+                                        <tr>
+                                            <td>What's wrong with my TRUDY!?</td>
+                                            <td>❤️ 24</td>
+                                            <td># 24</td>
+                                            <td>2022-01-01</td>
+                                        </tr>
+                                    </table>
+                                </span>
+                                <span>
+                                    <h1>Know-how</h1>
+                                    <hr>
+                                    <table>
+                                        <tr>
+                                            <td>What's wrong with my TRUDY!?</td>
+                                            <td>❤️ 24</td>
+                                            <td># 24</td>
+                                            <td>2022-01-01</td>
+                                        </tr>
+                                        <tr>
+                                            <td>What's wrong with my TRUDY!?</td>
+                                            <td>❤️ 24</td>
+                                            <td># 24</td>
+                                            <td>2022-01-01</td>
+                                        </tr>
+                                    </table>
+                                </span>
+                                <span>
+                                    <h1>Talk talk</h1>
+                                    <hr>
+                                    <table>
+                                        <tr>
+                                            <td>What's wrong with my TRUDY!?</td>
+                                            <td>❤️ 24</td>
+                                            <td># 24</td>
+                                            <td>2022-01-01</td>
+                                        </tr>
+                                        <tr>
+                                            <td>What's wrong with my TRUDY!?</td>
+                                            <td>❤️ 24</td>
+                                            <td># 24</td>
+                                            <td>2022-01-01</td>
+                                        </tr>
+                                    </table>
+                                </span>
+
+                                
+
+
+
+                            </main>
+                                  <!-- .grid -->
+                                  <nav class="pagination">
+                                    <span class="page-numbers current">1</span>
+                                    <a class="page-numbers" href="#">2</a>
+                                    <a class="next page-numbers" href="#">Next »</a>
+                                    </nav>
+                                    <br/>
+                        </div>
+                    </div>
+                        <!-- #main -->
+        <!--layout right-->
+                    <div class="layout-right" style="background-color: greenyellow; width: 10%;">
+                        <button style="color: blue;"> UPLOAD</button>
+                        <button> MYPAGE</button>
+                    </div>	
+        
+                    </div>
+                    <!-- #primary -->
+                </div>
+                <!-- #content -->
+            </div>
+            <!-- .container -->
+            <footer id="colophon" class="site-footer">
+            <div class="container">
+                <div class="site-info">
+                    <h1 style="font-family: 'Herr Von Muellerhoff';color: #ccc;font-weight:300;text-align: center;margin-bottom:0;margin-top:0;line-height:1.4;font-size: 46px;">Moschino</h1>
+                    Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+        
+                </div>
+            </div>	
+            </footer>
+            <a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
+        </div>
+        <!-- #page -->
+        <script src='js/jquery.js'></script>
+        <script src='js/plugins.js'></script>
+        <script src='js/scripts.js'></script>
+        <script src='js/masonry.pkgd.min.js'></script>
+</html>

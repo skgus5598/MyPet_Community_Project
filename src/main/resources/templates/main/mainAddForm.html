@@ -7,13 +7,13 @@
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 
-    <link rel='stylesheet' href='static/css/woocommerce-layout.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='static/css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)'/>
-    <link rel='stylesheet' href='static/css/woocommerce.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='static/css/font-awesome.min.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='static/css/style.css' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css' media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
-    <link rel='stylesheet' href='static/css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
 </head>
 <style>
     .searchDiv{
@@ -21,7 +21,30 @@
         width: 80%;
         padding-top: 50px;
     }
+    .detail_img{
+        width: 50px;
+    }
+    .imgMain{
+        width: 400px;
+        height: 450px;
+    }
 </style>
+
+<script>
+    function readURL(input){
+        var file = input.files[0]
+        console.log(file)
+        if(file != ''){
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e){
+                $('#preview').attr('src', e.target.result);
+            }
+        }
+    }
+
+</script>
+
 <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
 <div id="page" >
     <div class="container" >
@@ -86,27 +109,27 @@
                 <div id="primary" class="content-area column full">
                     <main id="main" class="site-main">
 
-                        <!--아래 div를 돌리면 밑으로-->
-                        <div th:each="list : ${data}" class="grid portfoliogrid" style="background-color: burlywood; padding-left: 100px; ">
-                            <article class="hentry">
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail" >
-                                        <a href="portfolio-item.html">
-                                            <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg">
-                                </header>
-                            </article>
-                            <article class="hentry" >
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail" >
-                                        <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
-                                        <a class='portfoliotype' href='#' >[[*{list.userId}]]</a>
-                                        <a class='portfoliotype' href='portfolio-category.html'>Golden Retriever </a><br>
-                                        <label th:text="${list.content}" /><br><br>
-                                        <input type="text" placeholder="Add Comment ..">
-                                        <input type="submit">
-                                </header>
-                            </article>
-                        </div>
+                        <img src="/download?files=20220710232855-home.png//20220710232855-order.png//" >aaa</a>
+
+                        <form th:action="@{/main/insertForm}" th:method="post" enctype="multipart/form-data">
+                            <a href="#"> ⇽ go back to story</a><br><br>
+                            <div style="background-color: burlywood; text-align: center;">
+                                <a href="portfolio-item.html">
+                                    <img id="preview" >
+                                    <input type="file" th:multiple="multiple" name="files" id="file_0" class="upload-hidden" onchange="readURL(this)" />
+                            </div>
+                            <div>
+                                <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
+                                <input type="hidden" th:name="userId" th:value="abc123">
+                                <a class='portfoliotype' href='#'>sunshimi</a>
+                                <a class='portfoliotype' href='#'>Golden Retriever </a>
+                                <textarea th:name="content" placeholder="write here!"></textarea>
+                                <input type="submit" th:value="register">
+                            </div>
+                        </form>
+
+
+
                         <!-- .grid -->
 
                         <nav class="pagination">
@@ -121,7 +144,7 @@
             <!-- #main -->
             <!--layout right-->
             <div class="layout-right" style="background-color: greenyellow; width: 10%;">
-                <button style="color: blue;" th:onclick="|location.href='@{/main/addForm}'|"> UPLOAD</button>
+                <button style="color: blue;"> UPLOAD</button>
                 <button> MYPAGE</button>
             </div>
 
@@ -143,9 +166,9 @@
 <a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
 </div>
 <!-- #page -->
-<script src='static/js/jquery.js'></script>
-<script src='static/js/plugins.js'></script>
-<script src='static/js/scripts.js'></script>
-<script src='static/js/masonry.pkgd.min.js'></script>
+<script th:src='@{/static/js/jquery.js}'></script>
+<script th:src='@{/static/js/plugins.js}'></script>
+<script th:src='@{/static/js/scripts.js}'></script>
+<script th:src='@{/static/js/masonry.pkgd.min.js}'></script>
 </body>
 </html>
