@@ -25,13 +25,13 @@ public class MainBoard {
     @Column(name = "user_id")
     private String userId;
 
-    @Column(name = "img_Name")
+    @Column(name = "trudy_id")
+    private String trudyId;
+
+    @Column(name = "img_name")
     private String imgName;
 
-    @Column(name = "main_like")
-    private int mainLike;
-
-    @Column(name = "main_reply")
-    private int mainReply;
+    @Column(name = "like_no")
+    private int likeNo;
 
 }
