@@ -1,0 +1,105 @@
+CREATE TABLE member_info(  /* member information */
+                            user_id VARCHAR(45) PRIMARY KEY , /* user id */
+                            user_nick VARCHAR(45) NOT NULL ,  /* user nickname*/
+                            user_pwd VARCHAR(200) NOT NULL ,  /* user password */
+                            insert_date TIMESTAMP DEFAULT current_timestamp NOT NULL              /* register date*/
+);
+
+CREATE TABLE main_board( /* main pet story board*/
+                           board_id INT PRIMARY KEY AUTO_INCREMENT,  /* board number */
+                           content VARCHAR(100) NOT NULL ,   /* board content */
+                           user_id VARCHAR(45) NOT NULL ,    /* writer */
+                           trudy_id INT, /* writer's pet*/
+                           img_name VARCHAR(100) NOT NULL ,  /* img url*/
+                           like_no VARCHAR(2),
+                           insert_date TIMESTAMP DEFAULT current_timestamp NOT NULL ,    /* insert date*/
+                           FOREIGN KEY (user_id) REFERENCES member_info(user_id) ON DELETE CASCADE ,
+                           FOREIGN KEY (trudy_id) REFERENCES trudy(trudy_id) /**/
+);
+CREATE TABLE main_board_reply( /* main story board reply */
+                                 board_id INT,
+                                 rep_user_id VARCHAR(45),
+                                 rep_content VARCHAR(500) not null ,
+                                 insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                 FOREIGN KEY (board_id) REFERENCES main_board(board_id)
+);
+
+
+
+
+CREATE TABLE trudy( /* pet information*/
+                      trudy_id INT AUTO_INCREMENT PRIMARY KEY ,   /* pet number*/
+                      trudy_type VARCHAR(45) NOT NULL ,   /* pet type ex) retriever, jindo */
+                      trudy_name VARCHAR(45) NOT NULL ,   /* pet name*/
+                      trudy_age VARCHAR(10) NOT NULL ,    /* pet age*/
+                      trudy_gender VARCHAR(6) NOT NULL ,  /* male_female */
+                      trudy_intro VARCHAR(300),   /* pet introduction*/
+                      user_id VARCHAR(45),    /* pet owner*/
+                      insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,   /* insert date */
+                      FOREIGN KEY (user_id) REFERENCES member_info(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE board_category(    /* Things to Know category  */
+                               board_category_id INT PRIMARY KEY AUTO_INCREMENT,
+                               board_category_name VARCHAR(20)
+);
+
+CREATE TABLE board_one( /* Things to Know board*/
+                          board_id INT PRIMARY KEY AUTO_INCREMENT,
+                          board_category_id INT not null ,
+                          user_id VARCHAR(45),
+                          board_title VARCHAR(100) NOT NULL ,
+                          board_content VARCHAR(1000) NOT NULL ,
+                          img_name VARCHAR(100),
+                          like_no VARCHAR(2),
+                          hit_no varchar(2),
+                          insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                          FOREIGN KEY (board_category_id) REFERENCES board_category(board_category_id),
+                          FOREIGN KEY (user_id) REFERENCES member_info(user_id) ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE board_two( /* Know-How board */
+                          board_id INT PRIMARY KEY AUTO_INCREMENT,
+                          user_id VARCHAR(45),
+                          board_title VARCHAR(100) NOT NULL ,
+                          board_content VARCHAR(1000) NOT NULL ,
+                          img_name VARCHAR(1000),
+                          like_no VARCHAR(2),
+                          hit_no VARCHAR(2),
+                          insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                          FOREIGN KEY (user_id) REFERENCES member_info(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE board_two_reply(   /* Know-How board reply table*/
+                                board_id INT,
+                                rep_user_id VARCHAR(45) ,
+                                rep_content VARCHAR(500) not null ,
+                                insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                FOREIGN KEY (board_id) REFERENCES board_two(board_id)
+);
+
+
+
+CREATE TABLE board_three(   /* Talk talk board */
+                            board_id INT PRIMARY KEY AUTO_INCREMENT,    /**/
+                            user_id VARCHAR(45),    /**/
+                            board_title VARCHAR(100) NOT NULL ,   /**/
+                            board_content VARCHAR(1000) NOT NULL ,    /**/
+                            img_name VARCHAR(100),  /**/
+                            like_no VARCHAR(2), /**/
+                            insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    /**/
+                            FOREIGN KEY (user_id) REFERENCES member_info(user_id) ON DELETE CASCADE /**/
+);
+
+CREATE TABLE board_three_reply(   /* Talk talk board reply table*/
+                                board_id INT,
+                                rep_user_id VARCHAR(45) ,
+                                rep_content VARCHAR(500) not null ,
+                                insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                FOREIGN KEY (board_id) REFERENCES board_three(board_id)
+);
+
+
+
