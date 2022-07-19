@@ -41,7 +41,9 @@ public class MainServiceImpl implements MainService {
         try {
             for(int i=0; i<files.size(); i++){
                 String filename = current_date+files.get(i).getOriginalFilename();
-                files.get(i).transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
+//                files.get(i).transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
+                files.get(i).transferTo(new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+ filename));
+
                 dbFileName += filename + "//"; /*  db저장 시 ' // ' 구분자  */
             }
             System.out.println("dbFilename : " + dbFileName);

@@ -33,7 +33,7 @@ public class MainController {
     public String mainPage(Model model){
         mainService.getList(model);
      //   return "index";
-        return "layout/layoutPage";
+        return "index";
     }
 
     @GetMapping("main/addForm")
@@ -53,7 +53,8 @@ public class MainController {
         String[] imgName = dbFileName.split("//");
         System.out.println("imgName ? " + Arrays.toString(imgName));
         for(String img :imgName){
-            File file = new File("/Users/raina/Desktop/mppImg/"+img);
+//            File file = new File("/Users/raina/Desktop/mppImg/"+img);
+            File file = new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+img);
 
             System.out.println(file.getName());
 

@@ -20,8 +20,8 @@
     </select>
 
     <insert id="insertBoard">
-        INSERT INTO main_board(content, user_id, img_Name, main_like, main_reply)
-        VALUE (#{content}, #{userId}, #{imgName}, '0', '0')
+        INSERT INTO main_board(content, user_id, img_name, like_no)
+        VALUE (#{content}, #{userId}, #{imgName}, '0')
     </insert>
 
 </mapper>
