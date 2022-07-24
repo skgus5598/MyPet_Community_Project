@@ -10,4 +10,5 @@ public interface MainRepository extends JpaRepository<MainBoard,Integer> {
 
     MainBoard findByBoardId(int boardId);
     List<MainBoard> findAll();
+    int deleteByBoardId(int boardId);
 }

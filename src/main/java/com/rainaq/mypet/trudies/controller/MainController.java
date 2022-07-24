@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,14 +45,14 @@ public class MainController {
         return "redirect:/";
     }
 
-    @GetMapping("download")
+    @GetMapping("main/download")
     public void download(@RequestParam("files") String dbFileName, HttpServletResponse response)throws Exception{
     //    response.addHeader("Content-disposition", "attachment;filenAME="+dbFileName);
         String[] imgName = dbFileName.split("//");
         System.out.println("imgName ? " + Arrays.toString(imgName));
         for(String img :imgName){
-//            File file = new File("/Users/raina/Desktop/mppImg/"+img);
-            File file = new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+img);
+            File file = new File("/Users/raina/Desktop/mppImg/"+img);
+//            File file = new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+img);
 
             System.out.println(file.getName());
 
@@ -63,5 +61,12 @@ public class MainController {
             fis.close();
         }
     }
+
+    @DeleteMapping(value = "main/deleteBoard", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String deleteboard(@RequestParam int boardId, @RequestParam String imgName ){
+        return mainService.deleteBoard(boardId, imgName);
+    }
+
 
 }

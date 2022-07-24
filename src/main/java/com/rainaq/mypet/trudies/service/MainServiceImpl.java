@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -41,8 +42,8 @@ public class MainServiceImpl implements MainService {
         try {
             for(int i=0; i<files.size(); i++){
                 String filename = current_date+files.get(i).getOriginalFilename();
-//                files.get(i).transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
-                files.get(i).transferTo(new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+ filename));
+                files.get(i).transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
+//                files.get(i).transferTo(new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+ filename));
 
                 dbFileName += filename + "//"; /*  db저장 시 ' // ' 구분자  */
             }
@@ -54,6 +55,27 @@ public class MainServiceImpl implements MainService {
 
         mapper.insertBoard(dto);
     }
+
+    @Override
+    @Transactional
+    public String deleteBoard(int boardId, String imgName) {
+        deleteImage(imgName);
+        int result = repository.deleteByBoardId(boardId);
+        if(result == 1){
+            return "{\"result\" : true}";
+        }else{
+            return"{\"result\" : false}";
+        }
+    }
+
+    private void deleteImage(String imgName){
+        String[] imgfileName = imgName.split("//");
+        for(String img : imgfileName){
+            File deleteImage = new File("/Users/raina/Desktop/mppImg/"+img);
+            deleteImage.delete();
+        }
+    }
+
 
 
 }
