@@ -1,6 +1,6 @@
-package com.rainaq.mypet.trudies.service;
+package com.rainaq.mypet.newStory.service;
 
-import com.rainaq.mypet.trudies.entity.MainBoard;
+import com.rainaq.mypet.newStory.entity.MainBoard;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="mainHeader">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
@@ -13,7 +15,7 @@
     <link rel='stylesheet' href='style.css' type='text/css' media='all'/>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
     <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
-    </head>
+</head>
     <style>
      #main-title{
         display: flex; 
@@ -37,28 +39,20 @@
                     </div>
                     
                 </div>
-                <nav id="site-navigation" class="main-navigation" style="background-color: green;">
-                <button class="menu-toggle">Menu</button>
-                <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-                <div class="menu-menu-1-container">
-                    <ul id="menu-menu-1" class="menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="shop.html">Shop</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="elements.html">Elements</a></li>
-                        <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="portfolio-item.html">Portfolio Item</a></li>
-                            <li><a href="blog-single.html">Blog Article</a></li>
-                            <li><a href="shop-single.html">Shop Item</a></li>
-                            <li><a href="portfolio-category.html">Portfolio Category</a></li>
-                        </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                </nav>
+                    <div layout:fragment="layoutIndex">
+                    <nav id="site-navigation" class="main-navigation" style="background-color: green;">
+                        <button class="menu-toggle">Menu</button>
+                        <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+                        <div class="menu-menu-1-container">
+                            <ul id="menu-menu-1" class="menu">
+                                <li><a th:href="@{/}">New Story</a></li>
+                                <li><a th:href="@{#}">Things To Know</a></li>
+                                <li><a th:href="@{#}">Sharing Info</a></li>
+                                <li><a th:href="@{#}">Talk Talk</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    </div>
                 </header>
                 <!-- #masthead -->
                 <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">

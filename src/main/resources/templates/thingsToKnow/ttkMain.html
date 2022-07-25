@@ -21,48 +21,35 @@
         width: 80%;
         padding-top: 50px;
     }
-</style>
-<script>
-    var count = 0;
-    function nextImage(imgFullName){
-        var imgNm = imgFullName.split("//");
-        var cnt = 0;
-        for(i=0; i<imgNm.length -1 ; i++){
-            cnt ++; // 사진 총 개수 구하기
-        }
-        if(count == cnt){
-            count = 0;
-        }else if(cnt < 2){ // 사진이 한 장일 경우
-            count = 0;
-        }else{
-            count = 1;
-        }
-        document.getElementById('imageSite').src="newStory/download?files=" +imgNm[count]+" ";
-        count ++;
+    .site-main img{
+        width: 100px;
+        height: 100px;
+    }
+    #main-title{
+        display: flex;
+        background-color: red;
+        width: 100%;
+        height: 100px;
+    }
+    .story-contents{
+        justify-content: center;
+        text-align: center;
+        background-color: aquamarine;
+        display: flex;
+        flex-wrap: wrap; /*행을 다 채우면 다음 행으로 개행*/
+        width: 100%;
+    }
+    .story-contents img{
+        width: 200px;
+        height: 200px;
+    }
+    .sContents{
+        border: 2px solid black;
+        margin-right: 30px;
     }
 
-    function delStory(boardId, imgName){
-        $.ajax({
-            url : "/newStory/deleteBoard?boardId="+boardId+"&imgName="+imgName,
-            type : "DELETE",
-            dataType : "JSON",
-            success : function(data){
-                if(data.result == true){
-                    alert("delete success");
-                    location.href="/newStory/main";
+</style>
 
-                }else{
-                    alert("delete fail")
-                }
-            },
-            error : function(){
-                alert("server - fail");
-            }
-        })
-    };
-
-
-</script>
 <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
 <div id="page" >
     <div class="container" >
@@ -117,39 +104,52 @@
                 <div id="primary" class="content-area column full">
                     <main id="main" class="site-main">
 
-                        <!--아래 div를 돌리면 밑으로-->
-                        <div th:each="list : ${data}" class="grid portfoliogrid" style="background-color: burlywood; padding-left: 100px; ">
-                            <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail" style="display: flex" >
-                                        <div>
-                                            <a th:href="@{#}"> <!-- mainImage가 들어가야함(제일 첫번째 이미지파일이름) -->
-                                                <img id="imageSite" th:src="@{/newStory/download(files=${list.imgName})}">
-                                            </a>
-                                        </div>
-                                        <div><a th:onclick="nextImage([[${list.imgName}]])">&gt; NEXT</a></div>
-                                    </div>
-                                </header>
-                            </article>
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail" >
-                                        <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
-                                        <a class='portfoliotype' href='#' >[[*{list.userId}]]</a>
-                                        <a class='portfoliotype' href='portfolio-category.html'>Golden Retriever </a>
-                                        <button type="button" th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE</button>
-                                        <br>
-                                        <label th:text="${list.content}" /><br><br>
-                                        <div style="display: flex">
-                                            <input type="text" placeholder="Add Comment ..">
-                                            <input type="submit">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                </header>
-                            </article>
+                      <a th:href="@{#}">ALL</a>
+                      <a th:href="@{#}">HEALTH</a>
+                      <a th:href="@{#}">EDUCATION</a>
+                      <a th:href="@{#}">BREED</a>
+                      <a th:href="@{/ttk/addForm}">+ADD</a>
+
+                        <div class="story-contents">
+                            <div class="sContents">
+                                <a href="#">
+                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
+                                    <label>HEALTH </label><br>
+                                    <label>강아지 낑낑거리는 이유</label>
+                                </a>
+                                <br><br>
+                            </div>
+                            <div class="sContents">
+                                <a href="#">
+                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
+                                    <label>EDUCATION </label><br>
+                                    <label>강아지 낑낑거리는 이유</label>
+                                </a>
+                                <br><br>
+                            </div>
+                            <div class="sContents">
+                                <a href="#">
+                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
+                                    <label>HEALTH </label><br>
+                                    <label>강아지 낑낑거리는 이유</label>
+                                </a>
+                                <br><br>
+                            </div>
+                            <div class="sContents">
+                                <a href="#">
+                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
+                                    <label>HEALTH </label><br>
+                                    <label>강아지 낑낑거리는 이유</label>
+                                </a>
+                                <br><br>
+                            </div>
                         </div>
-                        <!-- .grid -->
+
+
+
+
+
+
 
                         <nav class="pagination">
                             <span class="page-numbers current">1</span>

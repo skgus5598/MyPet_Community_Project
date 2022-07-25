@@ -1,4 +1,4 @@
-package com.rainaq.mypet.trudies.entity;
+package com.rainaq.mypet.newStory.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,11 +1,10 @@
-package com.rainaq.mypet.trudies.service;
+package com.rainaq.mypet.newStory.service;
 
-import com.rainaq.mypet.trudies.entity.MainBoard;
-import com.rainaq.mypet.trudies.mapper.MainMapper;
-import com.rainaq.mypet.trudies.repository.MainRepository;
+import com.rainaq.mypet.newStory.entity.MainBoard;
+import com.rainaq.mypet.newStory.mapper.MainMapper;
+import com.rainaq.mypet.newStory.repository.MainRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -42,8 +41,8 @@ public class MainServiceImpl implements MainService {
         try {
             for(int i=0; i<files.size(); i++){
                 String filename = current_date+files.get(i).getOriginalFilename();
-                files.get(i).transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
-//                files.get(i).transferTo(new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+ filename));
+//                files.get(i).transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
+                files.get(i).transferTo(new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+ filename));
 
                 dbFileName += filename + "//"; /*  db저장 시 ' // ' 구분자  */
             }
@@ -71,7 +70,9 @@ public class MainServiceImpl implements MainService {
     private void deleteImage(String imgName){
         String[] imgfileName = imgName.split("//");
         for(String img : imgfileName){
-            File deleteImage = new File("/Users/raina/Desktop/mppImg/"+img);
+//            File deleteImage = new File("/Users/raina/Desktop/mppImg/"+img);
+            File deleteImage = new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+img);
+
             deleteImage.delete();
         }
     }

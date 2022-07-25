@@ -1,8 +1,7 @@
-package com.rainaq.mypet.trudies.mapper;
+package com.rainaq.mypet.newStory.mapper;
 
-import com.rainaq.mypet.trudies.entity.MainBoard;
+import com.rainaq.mypet.newStory.entity.MainBoard;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MainMapper {
