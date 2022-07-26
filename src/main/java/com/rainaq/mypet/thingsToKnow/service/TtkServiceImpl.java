@@ -40,17 +40,21 @@ public class TtkServiceImpl implements TtkService {
         }
         dbFileName += filename;
 
-        System.out.println("dbFilename : " + dbFileName);
-
         dto.setImgName(dbFileName);
         mapper.insertBoard(dto);
     }
 
     @Override
-    public void getList(Model model) {
+    public void getAllList(Model model) {
         List<TtkBoard> list =  repo.findAll();
 
         model.addAttribute("data", list);
+    }
+
+    @Override
+    public void boardDetail(Model model, int boardId) {
+        TtkBoard dto = repo.findByBoardId(boardId);
+        model.addAttribute("dto", dto);
     }
 
 

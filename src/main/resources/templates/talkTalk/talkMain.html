@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:fragment="mainHeader">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    
-    <link rel='stylesheet' href='css/woocommerce-layout.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)'/>
-    <link rel='stylesheet' href='css/woocommerce.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='style.css' type='text/css' media='all'/>
+
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css' media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
-    <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
 </head>
     <style>
      #main-title{
-        display: flex; 
-        background-color: red; 
+        display: flex;
+        background-color: red;
         width: 100%;
         height: 100px;
     }
@@ -56,7 +56,7 @@
                 </header>
                 <!-- #masthead -->
                 <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
-        <!--layoout Left-->				
+        <!--layoout Left-->
                     <div class="layout-left" style="background-color: aqua; width: 15%;">
                         <li class="menubar">MENUBAR</li>
                             <ul class="test">
@@ -79,9 +79,32 @@
                     <div class="layout-main" style="background-color: yellow; width:75%" >
                         <div id="primary" class="content-area column full">
                             <main id="main" class="site-main">
-                                <div id="main-title">
+                                <div id="main-title" style="display: flex">
                                     <h1>TALK TALK!</h1>
-                                </div>
+                                    <a th:href="@{/talk/addForm}">ADD TALK!</a>
+                                </div><br>
+                                <table >
+                                    <tr>
+                                        <td>TITLE</td>
+                                        <td>USER ID</td>
+                                        <td>LIKE </td>
+                                        <td>HIT</td>
+                                    </tr>
+                                    <tr th:each="list : ${list}">
+                                        <td ><a th:href="@{/talk/boardDetail(boardId=${list.boardId})}">[[${list.boardTitle}]]</a></td>
+                                        <td >[[${list.userId}]]</td>
+                                        <td >[[${list.likeNo}]]</td>
+                                        <td >[[${list.hitNo}]]</td>
+                                    </tr>
+
+                                </table>
+
+
+
+
+
+
+
 
 
                             <!-- .grid -->
@@ -95,8 +118,9 @@
                         </div>
                     </div>
                         <!-- #main -->
+
         <!--layout right-->
-                    <div class="layout-right" style="background-color: greenyellow; width: 10%;">
+                    <div class="layout-right" style="background-color: greenyellow;">
                         <button style="color: blue;"> UPLOAD</button>
                         <button> MYPAGE</button>
                     </div>	
@@ -119,8 +143,10 @@
             <a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
         </div>
         <!-- #page -->
-        <script src='js/jquery.js'></script>
-        <script src='js/plugins.js'></script>
-        <script src='js/scripts.js'></script>
-        <script src='js/masonry.pkgd.min.js'></script>
+        <script th:src='@{/static/js/jquery.js}'></script>
+        <script th:src='@{/static/js/plugins.js}'></script>
+        <script th:src='@{/static/js/scripts.js}'></script>
+        <script th:src='@{/static/js/masonry.pkgd.min.js}'></script>
+    </body>
+
 </html>

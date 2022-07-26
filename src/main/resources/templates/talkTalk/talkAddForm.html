@@ -21,55 +21,40 @@
         width: 80%;
         padding-top: 50px;
     }
+    .detail_img{
+        width: 50px;
+    }
+    .imgMain{
+        width: 400px;
+        height: 450px;
+    }
 </style>
+
 <script>
-    var count = 0;
-    function nextImage(imgFullName){
-        var imgNm = imgFullName.split("//");
-        var cnt = 0;
-        for(i=0; i<imgNm.length -1 ; i++){
-            cnt ++; // 사진 총 개수 구하기
+    function readURL(input){
+        var file = input.files[0]
+        console.log(file)
+        if(file != ''){
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e){
+                $('#preview').attr('src', e.target.result);
+            }
         }
-        if(count == cnt){
-            count = 0;
-        }else if(cnt < 2){ // 사진이 한 장일 경우
-            count = 0;
-        }else{
-            count = 1;
-        }
-        document.getElementById('imageSite').src="/newStory/download?files=" +imgNm[count]+" ";
-        count ++;
     }
 
-    function delStory(boardId, imgName){
-        $.ajax({
-            url : "/newStory/deleteBoard?boardId="+boardId+"&imgName="+imgName,
-            type : "DELETE",
-            dataType : "JSON",
-            success : function(data){
-                if(data.result == true){
-                    alert("delete success");
-                    location.href="/newStory/main";
 
-                }else{
-                    alert("delete fail")
-                }
-            },
-            error : function(){
-                alert("server - fail");
-            }
-        })
-    };
 
 
 </script>
+
 <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
 <div id="page" >
     <div class="container" >
         <header id="masthead" class="site-header">
             <div class="site-branding" style="display: flex;">
                 <div>
-                    <h1 class="site-title"><a th:href="@{newStory/main}" rel="home">Trudy</a></h1>
+                    <h1 class="site-title"><a th:href="@{/main}" rel="home">Trudy</a></h1>
                     <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
                 </div>
                 <div class="searchDiv">
@@ -86,7 +71,7 @@
                         <li><a th:href="@{/newStory/main}">New Story</a></li>
                         <li><a th:href="@{/ttk/ttkMain}">Things To Know</a></li>
                         <li><a th:href="@{#}">Sharing Info</a></li>
-                        <li><a th:href="@{#}">Talk Talk</a></li>
+                        <li><a th:href="@{/talk/talkMain}">Talk Talk</a></li>
                     </ul>
                 </div>
             </nav>
@@ -117,38 +102,27 @@
                 <div id="primary" class="content-area column full">
                     <main id="main" class="site-main">
 
-                        <!--아래 div를 돌리면 밑으로-->
-                        <div th:each="list : ${data}" class="grid portfoliogrid" style="background-color: burlywood; padding-left: 100px; ">
-                            <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail" style="display: flex" >
-                                        <div>
-                                            <a th:href="@{#}"> <!-- mainImage가 들어가야함(제일 첫번째 이미지파일이름) -->
-                                                <img id="imageSite" th:src="@{/newStory/download(files=${list.imgName})}">
-                                            </a>
-                                        </div>
-                                        <div><a th:onclick="nextImage([[${list.imgName}]])">&gt; NEXT</a></div>
-                                    </div>
-                                </header>
-                            </article>
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail" >
-                                        <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
-                                        <a class='portfoliotype' href='#' >[[*{list.userId}]]</a>
-                                        <a class='portfoliotype' href='portfolio-category.html'>Golden Retriever </a>
-                                        <button type="button" th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE</button>
-                                        <br>
-                                        <label th:text="${list.content}" /><br><br>
-                                        <div style="display: flex">
-                                            <input type="text" placeholder="Add Comment ..">
-                                            <input type="submit">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                </header>
-                            </article>
-                        </div>
+                <!--        <img src="/download?files=20220710232855-home.png//20220710232855-order.png//" >aaa</a> -->
+
+                        <form th:action="@{/talk/insertForm}" th:method="post" enctype="multipart/form-data">
+                            <a href="#"> ⇽ go back to story</a><br><br>
+                            <div style="background-color: burlywood; text-align: center;">
+                                <a href="#">
+                                    <img id="preview" >
+                                    <input type="file" th:multiple="multiple" name="file" id="file_0" class="upload-hidden" onchange="readURL(this)" />
+                                </a>
+                            </div>
+                            <div>
+                                <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
+                                <input type="text" th:name="userId" th:value="test123" th:readonly="test123"><br>
+                                <input type="text" th:name="boardTitle"  placeholder="제목을 입력하세요"><br>
+                                <textarea th:name="boardContent" placeholder="write here!"></textarea>
+                                <input type="submit" th:value="register">
+                            </div>
+                        </form>
+
+
+
                         <!-- .grid -->
 
                         <nav class="pagination">
@@ -163,7 +137,6 @@
             <!-- #main -->
             <!--layout right-->
             <div class="layout-right" style="background-color: greenyellow; width: 10%;">
-                <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> UPLOAD</button>
                 <button> MYPAGE</button>
             </div>
 

@@ -73,7 +73,7 @@
                         <li><a th:href="@{/newStory/main}">New Story</a></li>
                         <li><a th:href="@{/ttk/ttkMain}">Things To Know</a></li>
                         <li><a th:href="@{#}">Sharing Info</a></li>
-                        <li><a th:href="@{#}">Talk Talk</a></li>
+                        <li><a th:href="@{/talk/talkMain}">Talk Talk</a></li>
                     </ul>
                 </div>
             </nav>
@@ -112,7 +112,7 @@
 
                         <div class="story-contents" th:each="list : ${data}">
                             <div class="sContents">
-                                <a href="#">
+                                <a th:href="@{/ttk/boardDetail(boardId=${list.boardId})}">
                                     <img th:src="@{/files/download(files=${list.imgName})}"><br>
                                     <label>[[${list.categoryId}]] </label><br>
                                     <label>[[${list.boardTitle}]]</label>

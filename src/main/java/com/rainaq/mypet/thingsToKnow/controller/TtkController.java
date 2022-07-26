@@ -25,7 +25,7 @@ public class TtkController {
 
     @GetMapping("ttkMain")
     public String ttkMain(Model model){
-        tService.getList(model);
+        tService.getAllList(model);
         return "thingsToKnow/ttkMain";
     }
 
@@ -45,6 +45,13 @@ public class TtkController {
     public String insertForm(@RequestParam("file") MultipartFile file, TtkBoard dto){
         tService.insertForm(file,dto);
         return "redirect:/ttk/ttkMain";
+    }
+
+    @GetMapping("boardDetail")
+    public String boardDetail(@RequestParam("boardId") int boardId, Model model){
+        log.info("##### boardId ::" + boardId);
+        tService.boardDetail(model, boardId);
+        return "/thingsToKnow/ttkDetail";
     }
 
 }
