@@ -1,4 +1,4 @@
-package com.rainaq.mypet.boardCategory;
+package com.rainaq.mypet.common.boardCategory;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

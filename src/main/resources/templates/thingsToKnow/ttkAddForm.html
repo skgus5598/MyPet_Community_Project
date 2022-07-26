@@ -52,7 +52,9 @@
                 console.log(data);
                 var html = "";
                 for(var i=0; i<data.length; i++){
-                    html += "<option  th:value="+data[i]+">"+ data[i]+"</option>" //selected 옵션 넣기
+                 //   html += "<option th:selected='"+data[i]+" == "+data[i]+"'  th:value="+data[i]+">"+ data[i]+"</option>" //selected 옵션 넣기
+                    html += "<option value='"+(i+1)+" '>"+ data[i]+"</option>" //selected 옵션 넣기
+
                 }
                 $("#categoryList").html(html);
                 console.log($("#categoryList").val());
@@ -130,15 +132,16 @@
                             <div style="background-color: burlywood; text-align: center;">
                                 <a href="#">
                                     <img id="preview" >
-                                    <input type="file" th:multiple="multiple" name="files" id="file_0" class="upload-hidden" onchange="readURL(this)" />
+                                    <input type="file" th:multiple="multiple" name="file" id="file_0" class="upload-hidden" onchange="readURL(this)" />
                             </div>
                             <div>
-                                <select id="categoryList" th:onclick="getCategory()" th:name="boardCategory">
+                                <select id="categoryList" th:onclick="getCategory()" th:name="categoryId">
                                     <option>카테고리선택</option>
                                 </select>
                                 <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
                                 <input type="hidden" th:name="userId" th:value="test123">
-                                <textarea th:name="content" placeholder="write here!"></textarea>
+                                <input type="text" th:name="boardTitle"  placeholder="제목을 입력하세요">
+                                <textarea th:name="boardContent" placeholder="write here!"></textarea>
                                 <input type="submit" th:value="register">
                             </div>
                         </form>

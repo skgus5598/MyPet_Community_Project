@@ -110,45 +110,16 @@
                       <a th:href="@{#}">BREED</a>
                       <a th:href="@{/ttk/addForm}">+ADD</a>
 
-                        <div class="story-contents">
+                        <div class="story-contents" th:each="list : ${data}">
                             <div class="sContents">
                                 <a href="#">
-                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                    <label>HEALTH </label><br>
-                                    <label>강아지 낑낑거리는 이유</label>
-                                </a>
-                                <br><br>
-                            </div>
-                            <div class="sContents">
-                                <a href="#">
-                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                    <label>EDUCATION </label><br>
-                                    <label>강아지 낑낑거리는 이유</label>
-                                </a>
-                                <br><br>
-                            </div>
-                            <div class="sContents">
-                                <a href="#">
-                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                    <label>HEALTH </label><br>
-                                    <label>강아지 낑낑거리는 이유</label>
-                                </a>
-                                <br><br>
-                            </div>
-                            <div class="sContents">
-                                <a href="#">
-                                    <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                    <label>HEALTH </label><br>
-                                    <label>강아지 낑낑거리는 이유</label>
+                                    <img th:src="@{/files/download(files=${list.imgName})}"><br>
+                                    <label>[[${list.categoryId}]] </label><br>
+                                    <label>[[${list.boardTitle}]]</label>
                                 </a>
                                 <br><br>
                             </div>
                         </div>
-
-
-
-
-
 
 
                         <nav class="pagination">
