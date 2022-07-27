@@ -42,13 +42,21 @@
               type : "GET",
               url : "/myPage/getTrudyList",
               success : function(list){
-                  alert("success load");
-                  console.log("list ? " + list);
+                  let html ="";
                   list.forEach(function(data){
-                      console.log(data.trudyName);
-                      console.log(data.trudyType);
-                      console.log(data.userId);
+                      html += "<div  style=\"display: flex; \">"
+                      html += "<div style=\"width: 50%; text-align: center;\">"
+                      html += "<img src='/files/download?files="+data.imgName+"'><br>"
+                      html += "</div>"
+                      html += "<div  style=\"background-color:red;width: 50%; \">"
+                      html += "<label>"+data.trudyName +"</label><br>";
+                      html += "<label>"+data.trudyGender +"</label><br>";
+                      html += "<label>"+data.trudyType +"</label><br>";
+                      html += "<label>"+data.trudyIntro +"</label><br>";
+                      html += "<button>MOD</button> <button>DEL</button>"
+                      html += "</div> </div>"
                   })
+                  $(".trudy_main").html(html);
               },
               error : function(){
                   alert("errorrrrrr");
@@ -201,23 +209,23 @@
                                 </div>
                                 <br>
 
-                                <div>
-                                    <div class="trudy_main" style="display: flex; ">
-                                        <div style="width: 50%; text-align: center;">
-                                            <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg">
-                                        </div>
-                                        <div  style="background-color:red;width: 50%; ">
-                                            <div style="background-color:beige">
-                                                <label><h3><b>SUNSHIMI</b> | 6years | female</h3></label>
-                                                <label>bacdefgswerbacdefgswerbacdef<br>gswerbacdefgswerbacdefgswer<br>gswerbacdefgswerbacdefgswer</label>
-                                            </div>    
-                                            <div  style="background-color:green; text-align: end;">
-                                                <button>MOD</button>
-                                                <button>DEL</button>
-                                            </div>
-                                        </div>                                        
-                                    </div>
-                                </div>
+                                <div class="trudy_main">
+<!--                                    <div  style="display: flex; ">  -->
+<!--                                        <div style="width: 50%; text-align: center;">-->
+<!--                                            <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg">-->
+<!--                                        </div>-->
+<!--                                        <div  style="background-color:red;width: 50%; ">-->
+<!--                                            <div id="trudyList" style="background-color:beige">-->
+<!--&lt;!&ndash;                                                <label><h3><b>SUNSHIMI</b> | 6years | female</h3></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <label>bacdefgswerbacdefgswerbacdef<br>gswerbacdefgswerbacdefgswer<br>gswerbacdefgswerbacdefgswer</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>    &ndash;&gt;-->
+<!--                                            <div  style="background-color:green; text-align: end;">-->
+<!--                                                <button>MOD</button>-->
+<!--                                                <button>DEL</button>-->
+<!--                                            </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+ <!--                                   </div>  -->
 
 
 
