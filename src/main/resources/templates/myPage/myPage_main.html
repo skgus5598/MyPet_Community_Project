@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th=http://www.thymeleaf.org>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    
-    <link rel='stylesheet' href='css/woocommerce-layout.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)'/>
-    <link rel='stylesheet' href='css/woocommerce.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='style.css' type='text/css' media='all'/>
+
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css' media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
-    <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
     </head>
     <style>
       .site-main img{
@@ -62,22 +62,14 @@
                 <button class="menu-toggle">Menu</button>
                 <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
                 <div class="menu-menu-1-container">
-                    <ul id="menu-menu-1" class="menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="shop.html">Shop</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="elements.html">Elements</a></li>
-                        <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="portfolio-item.html">Portfolio Item</a></li>
-                            <li><a href="blog-single.html">Blog Article</a></li>
-                            <li><a href="shop-single.html">Shop Item</a></li>
-                            <li><a href="portfolio-category.html">Portfolio Category</a></li>
+                    <div class="menu-menu-1-container">
+                        <ul id="menu-menu-1" class="menu">
+                            <li><a th:href="@{/newStory/main}">New Story</a></li>
+                            <li><a th:href="@{/ttk/ttkMain}">Things To Know</a></li>
+                            <li><a th:href="@{#}">Sharing Info</a></li>
+                            <li><a th:href="@{/talk/talkMain}">Talk Talk</a></li>
                         </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                    </div>
                 </div>
                 </nav>
                 </header>
@@ -101,7 +93,6 @@
                                 $(".test").slideDown();
                             }
                         });
-                    
                     </script>
                     <div class="layout-main" style="background-color: yellow; width:75%;" >
                         <div id="primary" class="content-area column full">
@@ -120,7 +111,7 @@
                                         </a>
                                     </div>
                                     <div style="text-align: center;">                    
-                                        <a href="#">
+                                        <a th:href="@{/myPage/myTrudy}">
                                         <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
                                         <b>TRUDIES</b>  
                                         </a>
@@ -136,42 +127,7 @@
                                         <label>❤️ 24     ♥sunshimi ♥hodor </label> 
                                         </a>
                                         <br><br>
-                                    </div> 
-                                    <div class="sContents">
-                                        <a href="#">
-                                        <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                        <label>❤️ 24     ♥sunshimi ♥hodor </label> 
-                                        </a>
-                                        <br><br>
-                                    </div> 
-                                    <div class="sContents">
-                                        <a href="#">
-                                        <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                        <label>❤️ 24     ♥sunshimi ♥hodor </label> 
-                                        </a>
-                                        <br><br>
-                                    </div>  
-                                    <div class="sContents">
-                                        <a href="#">
-                                        <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                        <label>❤️ 24     ♥sunshimi ♥hodor </label> 
-                                        </a>
-                                        <br><br>
-                                    </div>  
-                                    <div class="sContents">
-                                        <a href="#">
-                                        <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                        <label>❤️ 24     ♥sunshimi ♥hodor </label> 
-                                        </a>
-                                        <br><br>
-                                    </div>  
-                                    <div class="sContents">
-                                        <a href="#">
-                                        <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                                        <label>❤️ 24     ♥sunshimi ♥hodor </label> 
-                                        </a>
-                                        <br><br>
-                                    </div>  
+                                    </div>
                                 </div>
 
 
@@ -211,8 +167,9 @@
             <a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
         </div>
         <!-- #page -->
-        <script src='js/jquery.js'></script>
-        <script src='js/plugins.js'></script>
-        <script src='js/scripts.js'></script>
-        <script src='js/masonry.pkgd.min.js'></script>
+        <script th:src='@{/static/js/jquery.js}'></script>
+        <script th:src='@{/static/js/plugins.js}'></script>
+        <script th:src='@{/static/js/scripts.js}'></script>
+        <script th:src='@{/static/js/masonry.pkgd.min.js}'></script>
+    </body>
 </html>

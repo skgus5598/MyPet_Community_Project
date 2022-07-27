@@ -4,6 +4,7 @@ import com.rainaq.mypet.talkTalk.entity.TalkBoard;
 import com.rainaq.mypet.talkTalk.repository.TalkRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +25,7 @@ public class TalkServiceImpl implements TalkService {
 
     @Override
     public void getAllList(Model model) {
-        List<TalkBoard> list = repo.findAll();
+        List<TalkBoard> list = repo.findAll(Sort.by(Sort.Direction.DESC,"boardId"));
         model.addAttribute("list", list);
     }
 
