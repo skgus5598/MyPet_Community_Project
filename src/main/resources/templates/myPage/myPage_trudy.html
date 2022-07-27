@@ -92,7 +92,7 @@
                 contentType : false,
                 data : data,
                 success : function(data){
-                    alert("success");
+                    location.reload(); //이럴꺼면 ajax를 쓸 필요가 없는건데...
                 },
                 error : function(){
                     alert("server error");
@@ -186,7 +186,7 @@
                                 <br>
                                 <!-- Add form-->
                                 <div id="addTrudy" style="display: none">
-                                    <div class="trudy_main" style="display: flex; ">
+                                    <div style="display: flex; ">
                                         <form id="insertForm"   enctype="multipart/form-data">
                                             <div style="width: 50%; text-align: center;">
                                                 <input th:type="file" th:name="file" onchange="loadFile(this)">
