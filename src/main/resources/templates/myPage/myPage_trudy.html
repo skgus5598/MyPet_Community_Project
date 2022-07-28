@@ -82,11 +82,19 @@
             }
         }
 
+        function reset(){
+           $("#resetId").find('input[type=text]').each(function(){
+               $(this).val("");
+           });
+            $("#resetId").find('input[type=file]').val("");
+            $("#textAreaId").val("");
+        }
+
         function addTrudyEvent(){
             var data = new FormData($("#insertForm")[0]);
             $("#btnSubmit").prop("disabled", true);
+            reset();
             showAddForm();
-
 
 
             $.ajax({
@@ -203,19 +211,19 @@
                                 <br>
                                 <!-- Add form-->
                                 <div id="addTrudy" style="display: none">
-                                    <div style="display: flex; ">
+                                    <div th:id="resetId" style="display: flex; ">
                                         <form id="insertForm"   enctype="multipart/form-data">
                                             <div style="width: 50%; text-align: center;">
-                                                <input th:type="file" th:name="file" onchange="loadFile(this)">
+                                                <input  th:type="file" th:name="file" onchange="loadFile(this)">
                                             </div>
                                             <div  style="background-color:red;width: 50%; ">
                                                 <div style="background-color:beige">
-                                                    <input th:type="hidden" th:name="userId" th:value="test123">
-                                                    <input th:type="text" th:name="trudyName" placeholder="TRUDY NAME">
-                                                    <input th:type="text" th:name="trudyType" placeholder="TYPE ex) JINDO">
-                                                    <input th:type="text" th:name="trudyAge" placeholder="AGE">
-                                                    <input th:type="text" th:name="trudyGender" placeholder="GENDER">
-                                                    <textarea th:name="trudyIntro" placeholder="Tell me something about your Trudy!"></textarea>
+                                                    <input  th:type="hidden" th:name="userId" th:value="test123">
+                                                    <input  th:type="text" th:name="trudyName" placeholder="TRUDY NAME">
+                                                    <input  th:type="text" th:name="trudyType" placeholder="TYPE ex) JINDO">
+                                                    <input  th:type="text" th:name="trudyAge" placeholder="AGE">
+                                                    <input  th:type="text" th:name="trudyGender" placeholder="GENDER">
+                                                    <textarea th:id="textAreaId" th:name="trudyIntro" placeholder="Tell me something about your Trudy!"></textarea>
                                                 </div>
                                                 <div  style="background-color:green; text-align: end;">
                                                     <button id="btnSubmit" th:onclick="addTrudyEvent()">SUBMIT</button>
