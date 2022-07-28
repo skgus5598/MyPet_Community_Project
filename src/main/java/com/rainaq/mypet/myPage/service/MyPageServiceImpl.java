@@ -45,4 +45,9 @@ public class MyPageServiceImpl implements MyPageService{
     public List<Trudy> getList() {
         return repo.findAll();
     }
+
+    @Override
+    public void delTrudy(int trudyId) {
+        repo.deleteById(trudyId);
+    }
 }

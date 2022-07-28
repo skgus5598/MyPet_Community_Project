@@ -9,4 +9,6 @@ public interface MyPageService {
     void insertForm(MultipartFile file, Trudy dto);
 
     List<Trudy> getList();
+
+    void delTrudy(int trudyId);
 }

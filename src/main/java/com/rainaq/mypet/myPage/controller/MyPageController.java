@@ -35,6 +35,12 @@ public class MyPageController {
 
     }
 
+    @DeleteMapping(value = "deleteTrudy", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public void deleteTrudy(@RequestParam int trudyId){
+        mpService.delTrudy(trudyId);
+    }
+
 
     @PostMapping("insertForm")
     @ResponseBody

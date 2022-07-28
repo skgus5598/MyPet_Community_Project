@@ -37,34 +37,37 @@
 
     <script>
 
-        $(function (){
-          $.ajax({
-              type : "GET",
-              url : "/myPage/getTrudyList",
-              success : function(list){
-                  let html ="";
-                  list.forEach(function(data){
-                      html += "<div  style=\"display: flex; \">"
-                      html += "<div style=\"width: 50%; text-align: center;\">"
-                      html += "<img src='/files/download?files="+data.imgName+"'><br>"
-                      html += "</div>"
-                      html += "<div  style=\"background-color:red;width: 50%; \">"
-                      html += "<label>"+data.trudyName +"</label><br>";
-                      html += "<label>"+data.trudyGender +"</label><br>";
-                      html += "<label>"+data.trudyType +"</label><br>";
-                      html += "<label>"+data.trudyIntro +"</label><br>";
-                      html += "<button>MOD</button> <button>DEL</button>"
-                      html += "</div> </div>"
-                  })
-                  $(".trudy_main").html(html);
-              },
-              error : function(){
-                  alert("errorrrrrr");
-              }
-
-          })
+        $(function (){  // 즉시실행함수
+            getTrudyList();
 
         });
+
+        function getTrudyList(){
+            $.ajax({
+                type : "GET",
+                url : "/myPage/getTrudyList",
+                success : function(list){
+                    let html ="";
+                    list.forEach(function(data){
+                        html += "<div  style=\"display: flex; \">"
+                        html += "<div style=\"width: 50%; text-align: center;\">"
+                        html += "<img src='/files/download?files="+data.imgName+"'><br>"
+                        html += "</div>"
+                        html += "<div  style=\"background-color:red;width: 50%; \">"
+                        html += "<label>"+data.trudyName +"</label><br>";
+                        html += "<label>"+data.trudyGender +"</label><br>";
+                        html += "<label>"+data.trudyType +"</label><br>";
+                        html += "<label>"+data.trudyIntro +"</label><br>";
+                        html += "<button>MOD</button> <button onclick='delTrudy("+data.trudyId+")'>DEL</button>"
+                        html += "</div> </div>"
+                    })
+                    $(".trudy_main").html(html);
+                },
+                error : function(){
+                    alert("errorrrrrr");
+                }
+            })
+        }
 
 
 
@@ -81,8 +84,10 @@
 
         function addTrudyEvent(){
             var data = new FormData($("#insertForm")[0]);
-            alert("data ? " + data);
             $("#btnSubmit").prop("disabled", true);
+            showAddForm();
+
+
 
             $.ajax({
                 type : "POST",
@@ -92,7 +97,19 @@
                 contentType : false,
                 data : data,
                 success : function(data){
-                    location.reload(); //이럴꺼면 ajax를 쓸 필요가 없는건데...
+                    getTrudyList();
+                },
+                error : function(){
+                    alert("server error");
+                }
+            })
+        }
+        function delTrudy(trudyId){
+            $.ajax({
+                type : "Delete",
+                url : "/myPage/deleteTrudy?trudyId="+trudyId,
+                success : function(data){
+                    getTrudyList();
                 },
                 error : function(){
                     alert("server error");
