@@ -1,5 +1,6 @@
 package com.rainaq.mypet.talkTalk.controller;
 
+import com.rainaq.mypet.common.imgFiles.FileService;
 import com.rainaq.mypet.talkTalk.entity.TalkBoard;
 import com.rainaq.mypet.talkTalk.service.TalkServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,9 @@ public class TalkController {
     @Autowired
     TalkServiceImpl talkService;
 
+    @Autowired
+    FileService fileService;
+
     @GetMapping("talkMain")
     public String talkMain(Model model){
         talkService.getAllList(model);
@@ -41,21 +45,8 @@ public class TalkController {
         if(file.getOriginalFilename() == ""){
             dto.setImgName("N");
         }else{
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss-");
-            String current_date = now.format(formatter);
-            String dbFileName = "";
-
-            String filename = current_date+file.getOriginalFilename();
-//      file.transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
-            try{
-                file.transferTo(new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+ filename));
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            dbFileName += filename;
-
-            dto.setImgName(dbFileName);
+           String imgName = fileService.insertImgOne(file);
+            dto.setImgName(imgName);
 
         }
         talkService.insertForm(dto);

@@ -58,7 +58,8 @@
                         html += "<label>"+data.trudyGender +"</label><br>";
                         html += "<label>"+data.trudyType +"</label><br>";
                         html += "<label>"+data.trudyIntro +"</label><br>";
-                        html += "<button>MOD</button> <button onclick='delTrudy("+data.trudyId+")'>DEL</button>"
+                        html += "<button>MOD</button>";
+                        html += "<button onclick='delTrudy("+data.trudyId+" , \""+data.imgName+"\")'>DEL</button>"
                         html += "</div> </div>"
                     })
                     $(".trudy_main").html(html);
@@ -112,10 +113,10 @@
                 }
             })
         }
-        function delTrudy(trudyId){
+        function delTrudy(trudyId, imgName){
             $.ajax({
                 type : "Delete",
-                url : "/myPage/deleteTrudy?trudyId="+trudyId,
+                url : "/myPage/deleteTrudy?trudyId="+trudyId+"&imgName="+imgName,
                 success : function(data){
                     getTrudyList();
                 },
@@ -235,25 +236,8 @@
                                 <br>
 
                                 <div class="trudy_main">
-<!--                                    <div  style="display: flex; ">  -->
-<!--                                        <div style="width: 50%; text-align: center;">-->
-<!--                                            <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg">-->
-<!--                                        </div>-->
-<!--                                        <div  style="background-color:red;width: 50%; ">-->
-<!--                                            <div id="trudyList" style="background-color:beige">-->
-<!--&lt;!&ndash;                                                <label><h3><b>SUNSHIMI</b> | 6years | female</h3></label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <label>bacdefgswerbacdefgswerbacdef<br>gswerbacdefgswerbacdefgswer<br>gswerbacdefgswerbacdefgswer</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            </div>    &ndash;&gt;-->
-<!--                                            <div  style="background-color:green; text-align: end;">-->
-<!--                                                <button>MOD</button>-->
-<!--                                                <button>DEL</button>-->
-<!--                                            </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
- <!--                                   </div>  -->
 
-
-
+                                </div>
                             </main>
                                   <!-- .grid -->
                                   <nav class="pagination">

@@ -1,5 +1,6 @@
 package com.rainaq.mypet.myPage.service;
 
+import com.rainaq.mypet.common.imgFiles.FileService;
 import com.rainaq.mypet.myPage.entity.Trudy;
 import com.rainaq.mypet.myPage.repository.MyPageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +19,16 @@ public class MyPageServiceImpl implements MyPageService{
     @Autowired
     MyPageRepository repo;
 
+    @Autowired
+    FileService fileService;
+
+
 
     @Override
     public void insertForm(MultipartFile file, Trudy dto) {
 
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss-");
-        String current_date = now.format(formatter);
-        String dbFileName = "";
-
-        String filename = current_date+file.getOriginalFilename();
-        try{
-    //      file.transferTo(new File("/Users/raina/Desktop/mppImg/" + filename));
-            file.transferTo(new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+ filename));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        dbFileName += filename;
-
-        dto.setImgName(dbFileName);
+        String imgName = fileService.insertImgOne(file);
+        dto.setImgName(imgName);
 
         repo.save(dto);
     }
@@ -47,7 +39,8 @@ public class MyPageServiceImpl implements MyPageService{
     }
 
     @Override
-    public void delTrudy(int trudyId) {
+    public void delTrudy(int trudyId, String imgName) {
+        fileService.deleteImage(imgName);
         repo.deleteById(trudyId);
     }
 }

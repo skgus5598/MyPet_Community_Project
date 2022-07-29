@@ -37,8 +37,8 @@ public class MyPageController {
 
     @DeleteMapping(value = "deleteTrudy", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public void deleteTrudy(@RequestParam int trudyId){
-        mpService.delTrudy(trudyId);
+    public void deleteTrudy(@RequestParam int trudyId, @RequestParam String imgName){
+        mpService.delTrudy(trudyId, imgName);
     }
 
 

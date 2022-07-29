@@ -1,13 +1,20 @@
 package com.rainaq.mypet.common.imgFiles;
 
+import com.rainaq.mypet.myPage.entity.Trudy;
+import com.rainaq.mypet.newStory.entity.MainBoard;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("files")
@@ -28,5 +35,10 @@ public class FileController {
             fis.close();
         }
     }
+
+
+
+
+
 
 }

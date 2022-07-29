@@ -10,5 +10,5 @@ public interface MyPageService {
 
     List<Trudy> getList();
 
-    void delTrudy(int trudyId);
+    void delTrudy(int trudyId, String imgName);
 }
