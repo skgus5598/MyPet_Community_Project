@@ -111,15 +111,26 @@
             <!--layoout Left-->
             <div id="A" style="background-color: aqua;">
                 <button id="sideBtn" th:onclick="sideBar()">SideBar</button><br>
-                    sdfsdf<br>
-                    sdfsdf<br>
-                    bsdf<br>
+                   <div id="sideBarDiv">
+                       here here contents
+                   </div>
             </div>
 
             <script>
+                var isBool = true;
                 function sideBar(){
-                    $('#A').animate({width:0});
-                    $('#B').css('width', '80%');
+                    if(isBool == true){
+                        $("#sideBarDiv").hide();
+                        $('#A').animate({width:50});
+                        $('#B').css('width', '80%');
+                        isBool = false;
+                    }else{
+                        $('#A').animate({width:'20%'});
+                        $('#B').css('width', '60%');
+                        $("#sideBarDiv").show();
+                        isBool = true;
+                    }
+
                 }
                 // $('#button').toggle(
                 //     function() {
