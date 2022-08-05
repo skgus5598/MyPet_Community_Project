@@ -8,54 +8,69 @@
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 
     <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css' media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css'
+          media='only screen and (max-width: 768px)'/>
     <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
     <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
     <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
+    <link rel='stylesheet'
+          href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700'
+          type='text/css' media='all'/>
     <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
 </head>
 <style>
-    .searchDiv{
+    .searchDiv {
         background-color: orange;
         width: 80%;
         padding-top: 50px;
     }
+
+    #A{
+        width: 20%;
+    }
+    #B{
+        width: 60%;
+    }
+    #C{
+        width: 20%;
+    }
+
 </style>
 <script>
     var count = 0;
-    function nextImage(imgFullName){
+
+    function nextImage(imgFullName) {
         var imgNm = imgFullName.split("//");
         var cnt = 0;
-        for(i=0; i<imgNm.length -1 ; i++){
-            cnt ++; // 사진 총 개수 구하기
+        for (i = 0; i < imgNm.length - 1; i++) {
+            cnt++; // 사진 총 개수 구하기
         }
-        if(count == cnt){
+        if (count == cnt) {
             count = 0;
-        }else if(cnt < 2){ // 사진이 한 장일 경우
+        } else if (cnt < 2) { // 사진이 한 장일 경우
             count = 0;
-        }else{
+        } else {
             count = 1;
         }
-        document.getElementById('imageSite').src="/newStory/download?files=" +imgNm[count]+" ";
-        count ++;
+        document.getElementById('imageSite').src = "/newStory/download?files=" + imgNm[count] + " ";
+        count++;
     }
 
-    function delStory(boardId, imgName){
+    function delStory(boardId, imgName) {
         $.ajax({
-            url : "/newStory/deleteBoard?boardId="+boardId+"&imgName="+imgName,
-            type : "DELETE",
-            dataType : "JSON",
-            success : function(data){
-                if(data.result == true){
+            url: "/newStory/deleteBoard?boardId=" + boardId + "&imgName=" + imgName,
+            type: "DELETE",
+            dataType: "JSON",
+            success: function (data) {
+                if (data.result == true) {
                     alert("delete success");
-                    location.href="/newStory/main";
+                    location.href = "/newStory/main";
 
-                }else{
+                } else {
                     alert("delete fail")
                 }
             },
-            error : function(){
+            error: function () {
                 alert("server - fail");
             }
         })
@@ -63,8 +78,8 @@
 
 
 </script>
-<body >
-<div id="page" >
+<body>
+<div id="page">
     <div>
         <header id="masthead" class="site-header">
             <div class="site-branding" style="display: flex;">
@@ -94,37 +109,50 @@
         <!-- #masthead -->
         <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
             <!--layoout Left-->
-            <div class="layout-left" style="background-color: aqua; width: 15%;">
-                <li class="menubar">MENUBAR</li>
-                <ul class="test">
-                    <li>testest</li>
-                    <li>testest</li>
-                    <li>testest</li>
-                </ul>
+            <div id="A" style="background-color: aqua;">
+                <button id="sideBtn" th:onclick="sideBar()">SideBar</button><br>
+                    sdfsdf<br>
+                    sdfsdf<br>
+                    bsdf<br>
             </div>
-            <!--추후 사이드 슬라이드로 만들기 -->
+
             <script>
-                $(".menubar").click(function(){
-                    if($(".test").is(":visible")){
-                        $(".test").slideUp();
-                    }else{
-                        $(".test").slideDown();
-                    }
-                });
+                function sideBar(){
+                    $('#A').animate({width:0});
+                    $('#B').css('width', '80%');
+                }
+                // $('#button').toggle(
+                //     function() {
+                //         $('#B').css('left', '0')
+                //     }, function() {
+                //         $('#B').css('left', '200px')
+                //     })
+                //
+                // $('#toggle').toggle(function(){
+                //     $('#A').animate({width:0});
+                //     $('#B').animate({left:0});
+                // },function(){
+                //     $('#A').animate({width:200});
+                //     $('#B').animate({left:200});
+                // });
 
             </script>
-            <div class="layout-main" style="background-color: yellow; width:75%" >
+
+
+            <div id="B" class="layout-main" style="background-color: yellow;">
                 <div id="primary" class="content-area column full">
                     <main id="main" class="site-main">
 
                         <!--아래 div를 돌리면 밑으로-->
-                        <div th:each="list : ${data}" class="grid portfoliogrid" style="background-color: burlywood; padding-left: 100px; ">
+                        <div th:each="list : ${data}" class="grid portfoliogrid"
+                             style="background-color: burlywood; padding-left: 100px; ">
                             <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
                                 <header class="entry-header">
-                                    <div class="entry-thumbnail" style="display: flex" >
+                                    <div class="entry-thumbnail" style="display: flex">
                                         <div>
                                             <a th:href="@{#}"> <!-- mainImage가 들어가야함(제일 첫번째 이미지파일이름) -->
-                                                <img id="imageSite" th:src="@{/newStory/download(files=${list.imgName})}">
+                                                <img id="imageSite"
+                                                     th:src="@{/newStory/download(files=${list.imgName})}">
                                             </a>
                                         </div>
                                         <div><a th:onclick="nextImage([[${list.imgName}]])">&gt; NEXT</a></div>
@@ -133,13 +161,15 @@
                             </article>
                             <article>
                                 <header class="entry-header">
-                                    <div class="entry-thumbnail" >
+                                    <div class="entry-thumbnail">
                                         <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
-                                        <a class='portfoliotype' href='#' >[[*{list.userId}]]</a>
+                                        <a class='portfoliotype' href='#'>[[*{list.userId}]]</a>
                                         <a class='portfoliotype' href='portfolio-category.html'>Golden Retriever </a>
-                                        <button type="button" th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE</button>
+                                        <button type="button"
+                                                th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE
+                                        </button>
                                         <br>
-                                        <label th:text="${list.content}" /><br><br>
+                                        <label th:text="${list.content}"/><br><br>
                                         <div style="display: flex">
                                             <input type="text" placeholder="Add Comment ..">
                                             <input type="submit">
@@ -162,7 +192,7 @@
             </div>
             <!-- #main -->
             <!--layout right-->
-            <div class="layout-right" style="background-color: greenyellow; width: 10%;">
+            <div id="C" class="layout-right" style="background-color: greenyellow; ">
                 <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> UPLOAD</button>
                 <button th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
             </div>
@@ -176,7 +206,8 @@
 <footer id="colophon" class="site-footer">
     <div class="container">
         <div class="site-info">
-            <h1 style="font-family: 'Herr Von Muellerhoff';color: #ccc;font-weight:300;text-align: center;margin-bottom:0;margin-top:0;line-height:1.4;font-size: 46px;">Moschino</h1>
+            <h1 style="font-family: 'Herr Von Muellerhoff';color: #ccc;font-weight:300;text-align: center;margin-bottom:0;margin-top:0;line-height:1.4;font-size: 46px;">
+                Moschino</h1>
             Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
 
         </div>
