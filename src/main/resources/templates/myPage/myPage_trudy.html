@@ -59,7 +59,7 @@
                         html += "<label>"+data.trudyType +"</label><br>";
                         html += "<label>"+data.trudyIntro +"</label><br>";
                         html += "<button>MOD</button>";
-                        html += "<button onclick='delTrudy("+data.trudyId+" , \""+data.imgName+"\")'>DEL</button>"
+                        html += "<button onclick='delTrudy("+data.trudyId+" , \""+data.imgName+"\")'>DEL</button>" //문자는 따옴표 안에 넣어줘야한다.
                         html += "</div> </div>"
                     })
                     $(".trudy_main").html(html);

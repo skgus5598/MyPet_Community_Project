@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css' media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
+    <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
+</head>
+<style>
+    .searchDiv{
+        background-color: orange;
+        width: 80%;
+        padding-top: 50px;
+    }
+    #content{
+        text-align: center;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    #id_ok{
+        color: blue;
+        display: none;
+    }
+
+    #id_taken{
+        color: red;
+        display: none;
+    }
+
+    #nick_ok{
+        color: blue;
+        display: none;
+    }
+
+    #nick_taken{
+        color: red;
+        display: none;
+    }
+
+    #pwd_ok{
+        color : blue;
+        display: none;
+    }
+    #pwd_fail{
+        color : red;
+        display: none;
+    }
+
+</style>
+
+<script>
+    function showRegisterForm(){
+        $("#loginForm").hide();
+        $("#registerForm").show();
+    }
+
+    function showLoginForm(){
+        $("#loginForm").show();
+        $("#registerForm").hide();
+    }
+
+    function checkId(){ // id 중복체크 ajax
+        var id = $("#userId").val();
+
+        $.ajax({
+            url : "user/idCheck?userId="+id,
+            type : "post",
+            success : function (result){
+                if(result == false){
+                    $("#id_ok").show();
+                    $("#id_taken").hide();
+                }else{
+                    $("#id_taken").show();
+                    $("#id_ok").hide();
+                }
+            },
+            error:function(){
+                alert("server Error");
+            }
+        })
+
+    }
+
+    function nickCheck(){
+        var userNick = $("#userNick").val();
+
+        $.ajax({
+            url : "user/nickCheck?userNick="+userNick,
+            type : "post",
+            success : function (result){
+                if(result == false){
+                    $("#nick_ok").show();
+                    $("#nick_taken").hide();
+                }else{
+                    $("#nick_taken").show();
+                    $("#nick_ok").hide();
+                }
+            },
+            error:function(){
+                alert("server Error");
+            }
+        })
+    }
+
+    function pwdCheck(){
+        var userPwd = $("#userPwd").val();
+        const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g; // 특수문자 체크
+
+        if(userPwd.length >= 6){
+            if(regExp.test(userPwd)){
+                $("#pwd_ok").show();
+                $("#pwd_fail").hide();
+            }else{
+                $("#pwd_ok").hide();
+                $("#pwd_fail").show();
+            }
+        }else{
+            $("#pwd_ok").hide();
+            $("#pwd_fail").show();
+        }
+    }
+
+    function registerCheck() {   //아이디 , 닉네임 중복체크 & 비밀번호 6자 이상 특수문자 포함
+
+
+    }
+</script>
+
+<body >
+<div id="page" >
+    <div >
+        <header id="masthead" class="site-header">
+            <div class="site-branding" style="display: flex;">
+                <div>
+                    <h1 class="site-title"><a th:href="@{newStory/main}" rel="home">Trudy</a></h1>
+                    <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
+                </div>
+                <div class="searchDiv">
+                    <input type="text">
+                    <button disabled>search</button>
+                </div>
+
+            </div>
+
+        </header>
+        <!-- #masthead -->
+        <div id="content" class="site-content" style="background-color: blueviolet;">
+            <div id="loginForm">
+                <input name="userId" type="text" placeholder="ID"><br>
+                <input name="userPassword" type="text" placeholder="PASSWORD"><br>
+                <button>LOGIN</button><br>
+                <div style="color: red"> If you don't have account<br>
+                    <a th:href="@{#}" th:onclick="showRegisterForm()"><b>Register</b></a>
+                </div>
+            </div>
+            <div id="registerForm" style="display: none" >
+                <input id="userId" type="text" placeholder="ID" onchange="checkId()">
+                <span id = "id_ok">Available!</span>
+                <span id = "id_taken">Already Exists!</span>
+                <br>
+
+                <input id="userNick" type="text" placeholder="NICKNAME" onchange="nickCheck()">
+                <span id = "nick_ok">Available!</span>
+                <span id = "nick_taken">Already Exists!</span>
+                <br>
+
+                <input id="userPwd" type="text" placeholder="PASSWORD" oninput="pwdCheck()">
+                <span id="pwd_ok">Available!</span>
+                <span id = "pwd_fail"> More than 7 letters including special character</span>
+                <br>
+                <button th:onclick="registerCheck()">REGISTER</button>
+                <div style="color: red"> Did you have Account already?<br>
+                    <a th:href="@{#}" th:onclick="showLoginForm()"><b>Login</b></a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- #primary -->
+    </div>
+    <!-- #content -->
+</div>
+<!-- .container -->
+<footer id="colophon" class="site-footer">
+    <div class="container">
+        <div class="site-info">
+            <h1 style="font-family: 'Herr Von Muellerhoff';color: #ccc;font-weight:300;text-align: center;margin-bottom:0;margin-top:0;line-height:1.4;font-size: 46px;">Moschino</h1>
+            Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+
+        </div>
+    </div>
+</footer>
+<a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
+</div>
+<!-- #page -->
+<script th:src='@{/static/js/jquery.js}'></script>
+<script th:src='@{/static/js/plugins.js}'></script>
+<script th:src='@{/static/js/scripts.js}'></script>
+<script th:src='@{/static/js/masonry.pkgd.min.js}'></script>
+</body>
+</html>

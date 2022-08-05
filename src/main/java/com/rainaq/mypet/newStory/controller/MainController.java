@@ -27,8 +27,8 @@ public class MainController {
     @GetMapping("main")
     public String mainPage(Model model){
         mainService.getList(model);
-     //   return "index";
         return "index";
+
     }
 
     @GetMapping("addForm")
