@@ -23,4 +23,25 @@ public class UserService {
     public boolean checkNick(String userNick) {
         return repo.existsByUserNick(userNick);
     }
+
+    public void registerMember(UserEntity dto) {
+        repo.save(dto);
+    }
+
+    public int login(String userId, String userPwd) {
+
+        int result;
+        Optional<UserEntity> user = repo.findById(userId);
+
+        if(!user.isEmpty()){
+            if(userPwd.equals(user.get().getUserPwd())){
+                result = 1; // login success
+            }else{
+                result = 0; //password not match
+            }
+        }else{
+            result = 2; // No registered Id
+        }
+        return result;
+    }
 }

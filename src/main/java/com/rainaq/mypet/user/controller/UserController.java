@@ -1,5 +1,6 @@
 package com.rainaq.mypet.user.controller;
 
+import com.rainaq.mypet.user.entity.UserEntity;
 import com.rainaq.mypet.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,18 +13,28 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(value = "idCheck", produces = "application/json;charset=utf-8")
+    @GetMapping(value = "idCheck", produces = "application/json;charset=utf-8")
     @ResponseBody
     public boolean userIdCheck(@RequestParam("userId") String userId){
-        boolean exist = userService.checkId(userId);
-        return exist;
+        return userService.checkId(userId);
     }
 
-    @PostMapping(value = "nickCheck", produces = "application/json;charset=utf-8")
+    @GetMapping(value = "nickCheck", produces = "application/json;charset=utf-8")
     @ResponseBody
     public boolean userNickCheck(@RequestParam("userNick") String userNick){
-        boolean exist = userService.checkNick(userNick);
-        return exist;
+        return userService.checkNick(userNick);
+    }
+
+    @PostMapping("register")
+    public String registerMember(UserEntity dto){
+        userService.registerMember(dto);
+        return "redirect:/newStory/main";
+    }
+
+    @PostMapping(value = "login", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public int login(@RequestParam String userId, @RequestParam String userPwd){
+        return userService.login(userId, userPwd);
     }
 
 }
