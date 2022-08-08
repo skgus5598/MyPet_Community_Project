@@ -25,17 +25,11 @@
         padding-top: 50px;
     }
 
-    #A {
-        width: 20%;
-    }
+    #A {   width: 20%;  }
 
-    #B {
-        width: 60%;
-    }
+    #B {   width: 60%;  }
 
-    #C {
-        width: 20%;
-    }
+    #C {   width: 20%;  }
 
 </style>
 <script>
@@ -47,12 +41,16 @@
             dataType: "JSON",
             success : function (list){
                 console.log(list);
-                console.log(list[1].trudyName);
-                // console.log(data);
-                // html = "";
-                // html += "<div>"+data.trudyId+"</div>"
-                // $(".sideBarDiv").html(html);
-
+                var html = "";
+                list.forEach((item) =>{
+                    html += "<img src='/files/download?files="+item.imgName+"'><br>"
+                    html += "<div>Trudy Name :: "+item.trudyName+"</div>";
+                    html += "<div>Age :: "+item.trudyAge+"</div>";
+                    html += "<div>Gender :: "+item.trudyGender+"</div>";
+                    html += "<div>Intro ::" +item.trudyIntro+"</div>";
+                    html += "<hr>";
+                    $("#sideBarDiv").html(html);
+                })
             },
             error : function (){
                 alert("server Error");
