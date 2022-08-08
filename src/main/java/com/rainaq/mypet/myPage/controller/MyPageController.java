@@ -45,6 +45,7 @@ public class MyPageController {
     @PostMapping("insertForm")
     @ResponseBody
     public void addTrudyForm(@RequestParam("file") MultipartFile file, Trudy dto ){
+        System.out.println("loginUser ? " + dto.getUserId());
         mpService.insertForm(file, dto);
 
     }

@@ -1,5 +1,7 @@
 package com.rainaq.mypet.myPage.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,8 +38,11 @@ public class Trudy {
     @Column(name = "trudy_intro")
     private String trudyIntro;
 
-    @Column(name = "user_id")
-    private String userId;
+    @JsonBackReference // 순환참조 제거 // 자식클래스, 연관관계의 주인(외래키가 있는 곳)
+    @ManyToOne(fetch = FetchType.EAGER) // Many = many, User = one // EAGER전략, 바로 가져옴
+    @JoinColumn(name = "user_id")
+ //   @Column(name = "user_id")
+    private UserEntity userId;
 
     @Column(name = "img_name")
     private String imgName;

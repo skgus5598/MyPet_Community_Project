@@ -25,18 +25,43 @@
         padding-top: 50px;
     }
 
-    #A{
+    #A {
         width: 20%;
     }
-    #B{
+
+    #B {
         width: 60%;
     }
-    #C{
+
+    #C {
         width: 20%;
     }
 
 </style>
 <script>
+    //즉시실행함수
+    $(function (){
+        $.ajax({
+            url : "/user/userInfo",
+            type : "get",
+            dataType: "JSON",
+            success : function (list){
+                console.log(list);
+                console.log(list[1].trudyName);
+                // console.log(data);
+                // html = "";
+                // html += "<div>"+data.trudyId+"</div>"
+                // $(".sideBarDiv").html(html);
+
+            },
+            error : function (){
+                alert("server Error");
+            }
+        })
+    })
+
+
+
     var count = 0;
 
     function nextImage(imgFullName) {
@@ -76,6 +101,22 @@
         })
     };
 
+    var isBool = true;
+
+    function sideBar() {
+        if (isBool == true) {
+            $("#sideBarDiv").hide();
+            $('#A').animate({width: 50});
+            $('#B').animate({width: '80%'});
+            isBool = false;
+        } else {
+            $("#sideBarDiv").show();
+            $('#A').animate({width: '20%'});
+            $('#B').animate({width: '60%'});
+            isBool = true;
+        }
+    }
+
 
 </script>
 <body>
@@ -110,45 +151,16 @@
         <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
             <!--layoout Left-->
             <div id="A" style="background-color: aqua;">
-                <button id="sideBtn" th:onclick="sideBar()">SideBar</button><br>
-                   <div id="sideBarDiv">
-                       here here contents
-                   </div>
+                <button id="sideBtn" th:onclick="sideBar()">SideBar</button>
+                <br>
+                <div id="sideBarDiv">
+                    LoginUser = [[${session.loginUser}]] <br>
+                    UserId = [[${session.userId}]]
+                    여기다가 가져와야함
+
+
+                </div>
             </div>
-
-            <script>
-                var isBool = true;
-                function sideBar(){
-                    if(isBool == true){
-                        $("#sideBarDiv").hide();
-                        $('#A').animate({width:50});
-                        $('#B').css('width', '80%');
-                        isBool = false;
-                    }else{
-                        $('#A').animate({width:'20%'});
-                        $('#B').css('width', '60%');
-                        $("#sideBarDiv").show();
-                        isBool = true;
-                    }
-
-                }
-                // $('#button').toggle(
-                //     function() {
-                //         $('#B').css('left', '0')
-                //     }, function() {
-                //         $('#B').css('left', '200px')
-                //     })
-                //
-                // $('#toggle').toggle(function(){
-                //     $('#A').animate({width:0});
-                //     $('#B').animate({left:0});
-                // },function(){
-                //     $('#A').animate({width:200});
-                //     $('#B').animate({left:200});
-                // });
-
-            </script>
-
 
             <div id="B" class="layout-main" style="background-color: yellow;">
                 <div id="primary" class="content-area column full">
@@ -162,7 +174,7 @@
                                     <div class="entry-thumbnail" style="display: flex">
                                         <div>
                                             <a th:href="@{#}"> <!-- mainImage가 들어가야함(제일 첫번째 이미지파일이름) -->
-                                                <img id="imageSite"
+                                                <img id="imageSite" style="width: 400px; height: 300px"
                                                      th:src="@{/newStory/download(files=${list.imgName})}">
                                             </a>
                                         </div>
@@ -205,7 +217,11 @@
             <!--layout right-->
             <div id="C" class="layout-right" style="background-color: greenyellow; ">
                 <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> UPLOAD</button>
+                <br>
                 <button th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
+                <br>
+                <button th:onclick="|location.href='@{/user/logout}'|">LOGOUT</button>
+                <br>
             </div>
 
         </div>

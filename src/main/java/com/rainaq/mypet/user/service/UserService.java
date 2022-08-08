@@ -1,13 +1,14 @@
 package com.rainaq.mypet.user.service;
 
 
+import com.rainaq.mypet.myPage.entity.Trudy;
 import com.rainaq.mypet.user.entity.UserEntity;
 import com.rainaq.mypet.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -28,13 +29,14 @@ public class UserService {
         repo.save(dto);
     }
 
-    public int login(String userId, String userPwd) {
+    public int login(String userId, String userPwd, Model model) {
 
         int result;
         Optional<UserEntity> user = repo.findById(userId);
 
         if(!user.isEmpty()){
             if(userPwd.equals(user.get().getUserPwd())){
+                model.addAttribute("userNick", user.get().getUserNick());
                 result = 1; // login success
             }else{
                 result = 0; //password not match
@@ -43,5 +45,11 @@ public class UserService {
             result = 2; // No registered Id
         }
         return result;
+    }
+
+    public List<Trudy> getUserInfo(String userId) {
+        UserEntity dto = repo.findAllByUserId(userId);
+
+        return dto.getTrudyList();
     }
 }
