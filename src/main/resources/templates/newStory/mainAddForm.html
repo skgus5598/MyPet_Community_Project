@@ -1,173 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th=http://www.thymeleaf.org>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
-    <!--jquery-->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<html lang="en" xmlns:th=http://www.thymeleaf.org
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
 
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css' media='only screen and (max-width: 768px)'/>
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
-</head>
-<style>
-    .searchDiv{
-        background-color: orange;
-        width: 80%;
-        padding-top: 50px;
-    }
-    .detail_img{
-        width: 50px;
-    }
-    .imgMain{
-        width: 400px;
-        height: 450px;
-    }
-</style>
+<th:block layout:fragment="content">
+    <style>
+        .detail_img {   width: 50px;}
 
-<script>
-    function readURL(input){
-        var file = input.files[0]
-        console.log(file)
-        if(file != ''){
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function (e){
-                $('#preview').attr('src', e.target.result);
+        .imgMain {  width: 400px;  height: 450px;}
+
+    </style>
+
+    <script>
+        function readURL(input) {
+            var file = input.files[0]
+            console.log(file)
+            if (file != '') {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                }
             }
         }
-    }
+    </script>
 
-</script>
-
-<body>
-<div id="page" >
-    <div>
-        <header id="masthead" class="site-header">
-            <div class="site-branding" style="display: flex;">
-                <div>
-                    <h1 class="site-title"><a th:href="@{/main}" rel="home">Trudy</a></h1>
-                    <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
-                </div>
-                <div class="searchDiv">
-                    <input type="text">
-                    <button>search</button>
-                </div>
-
-            </div>
-            <nav id="site-navigation" class="main-navigation" style="background-color: green;">
-                <button class="menu-toggle">Menu</button>
-                <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-                <div class="menu-menu-1-container">
-                    <ul id="menu-menu-1" class="menu">
-                        <li><a th:href="@{#}">Home</a></li>
-                        <li><a th:href="@{#}">About</a></li>
-                        <li><a th:href="@{#}">Shop</a></li>
-                        <li><a th:href="@{#}">Blog</a></li>
-                        <li><a th:href="@{#}">Elements</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="sub-menu">
-                                <li><a th:href="@{#}">Portfolio Item</a></li>
-                                <li><a th:href="@{#}">Blog Article</a></li>
-                                <li><a th:href="@{#}">Shop Item</a></li>
-                                <li><a th:href="@{#}">Portfolio Category</a></li>
-                            </ul>
-                        </li>
-                        <li><a th:href="@{#}">Contact</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- #masthead -->
-        <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
-            <!--layoout Left-->
-            <div class="layout-left" style="background-color: aqua; width: 15%;">
-                <li class="menubar">MENUBAR</li>
-                <ul class="test">
-                    <li>testest</li>
-                    <li>testest</li>
-                    <li>testest</li>
-                </ul>
-            </div>
-            <!--추후 사이드 슬라이드로 만들기 -->
-            <script>
-                $(".menubar").click(function(){
-                    if($(".test").is(":visible")){
-                        $(".test").slideUp();
-                    }else{
-                        $(".test").slideDown();
-                    }
-                });
-
-            </script>
-            <div class="layout-main" style="background-color: yellow; width:75%" >
-                <div id="primary" class="content-area column full">
-                    <main id="main" class="site-main">
-
-                <!--        <img src="/download?files=20220710232855-home.png//20220710232855-order.png//" >aaa</a> -->
-
-                        <form th:action="@{/newStory/insertForm}" th:method="post" enctype="multipart/form-data">
-                            <a href="#"> ⇽ go back to story</a><br><br>
-                            <div style="background-color: burlywood; text-align: center;">
-                                <a href="portfolio-item.html">
-                                    <img id="preview" >
-                                    <input type="file" th:multiple="multiple" name="files" id="file_0" class="upload-hidden" onchange="readURL(this)" />
-                            </div>
-                            <div>
-                                <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
-                                <input type="hidden" th:name="userId" th:value="test123">
-                                <a class='portfoliotype' href='#'>sunshimi</a>
-                                <a class='portfoliotype' href='#'>Golden Retriever </a>
-                                <textarea th:name="content" placeholder="write here!"></textarea>
-                                <input type="submit" th:value="register">
-                            </div>
-                        </form>
-
-
-
-                        <!-- .grid -->
-
-                        <nav class="pagination">
-                            <span class="page-numbers current">1</span>
-                            <a class="page-numbers" href="#">2</a>
-                            <a class="next page-numbers" href="#">Next »</a>
-                        </nav>
-                        <br/>
-                    </main>
-                </div>
-            </div>
-            <!-- #main -->
-            <!--layout right-->
-            <div class="layout-right" style="background-color: greenyellow; width: 10%;">
-                <button> MYPAGE</button>
-            </div>
-
+    <form th:action="@{/newStory/insertForm}" th:method="post" enctype="multipart/form-data">
+        <a href="#"> ⇽ go back to story</a><br><br>
+        <div style="background-color: burlywood; text-align: center;">
+            <a href="portfolio-item.html">
+                <img id="preview">
+                <input type="file" th:multiple="multiple" name="files" id="file_0" class="upload-hidden"
+                       onchange="readURL(this)"/>
         </div>
-        <!-- #primary -->
-    </div>
-    <!-- #content -->
-</div>
-<!-- .container -->
-<footer id="colophon" class="site-footer">
-    <div class="container">
-        <div class="site-info">
-            <h1 style="font-family: 'Herr Von Muellerhoff';color: #ccc;font-weight:300;text-align: center;margin-bottom:0;margin-top:0;line-height:1.4;font-size: 46px;">Moschino</h1>
-            Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
-
+        <div>
+            <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
+            <input type="hidden" th:name="userId" th:value="test123">
+            <a class='portfoliotype' href='#'>sunshimi</a>
+            <a class='portfoliotype' href='#'>Golden Retriever </a>
+            <textarea th:name="content" placeholder="write here!"></textarea>
+            <input type="submit" th:value="register">
         </div>
-    </div>
-</footer>
-<a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
-</div>
-<!-- #page -->
-<script th:src='@{/static/js/jquery.js}'></script>
-<script th:src='@{/static/js/plugins.js}'></script>
-<script th:src='@{/static/js/scripts.js}'></script>
-<script th:src='@{/static/js/masonry.pkgd.min.js}'></script>
-</body>
+    </form>
+
+</th:block>
 </html>

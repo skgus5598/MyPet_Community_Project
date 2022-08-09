@@ -1,65 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th=http://www.thymeleaf.org>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
-    <!--jquery-->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
 
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css'
-          media='only screen and (max-width: 768px)'/>
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
-    <link rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700'
-          type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
-</head>
-<style>
-    .searchDiv {
-        background-color: orange;
-        width: 80%;
-        padding-top: 50px;
-    }
+<th:block layout:fragment="content">
 
-    #A {   width: 20%;  }
-
-    #B {   width: 60%;  }
-
-    #C {   width: 20%;  }
-
-</style>
 <script>
-    //즉시실행함수
-    $(function (){
-        $.ajax({
-            url : "/user/userInfo",
-            type : "get",
-            dataType: "JSON",
-            success : function (list){
-                console.log(list);
-                var html = "";
-                list.forEach((item) =>{
-                    html += "<img src='/files/download?files="+item.imgName+"'><br>"
-                    html += "<div>Trudy Name :: "+item.trudyName+"</div>";
-                    html += "<div>Age :: "+item.trudyAge+"</div>";
-                    html += "<div>Gender :: "+item.trudyGender+"</div>";
-                    html += "<div>Intro ::" +item.trudyIntro+"</div>";
-                    html += "<hr>";
-                    $("#sideBarDiv").html(html);
-                })
-            },
-            error : function (){
-                alert("server Error");
-            }
-        })
-    })
-
-
-
     var count = 0;
 
     function nextImage(imgFullName) {
@@ -98,152 +44,46 @@
             }
         })
     };
-
-    var isBool = true;
-
-    function sideBar() {
-        if (isBool == true) {
-            $("#sideBarDiv").hide();
-            $('#A').animate({width: 50});
-            $('#B').animate({width: '80%'});
-            isBool = false;
-        } else {
-            $("#sideBarDiv").show();
-            $('#A').animate({width: '20%'});
-            $('#B').animate({width: '60%'});
-            isBool = true;
-        }
-    }
-
-
 </script>
-<body>
-<div id="page">
-    <div>
-        <header id="masthead" class="site-header">
-            <div class="site-branding" style="display: flex;">
-                <div>
-                    <h1 class="site-title"><a th:href="@{newStory/main}" rel="home">Trudy</a></h1>
-                    <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
+
+
+
+    <div th:each="list : ${data}" class="grid portfoliogrid"
+         style="background-color: burlywood; padding-left: 100px; ">
+        <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
+            <header class="entry-header">
+                <div class="entry-thumbnail" style="display: flex">
+                    <div>
+                        <a th:href="@{#}"> <!-- mainImage가 들어가야함(제일 첫번째 이미지파일이름) -->
+                            <img id="imageSite" style="width: 400px; height: 300px"
+                                 th:src="@{/newStory/download(files=${list.imgName})}">
+                        </a>
+                    </div>
+                    <div><a th:onclick="nextImage([[${list.imgName}]])">&gt; NEXT</a></div>
                 </div>
-                <div class="searchDiv">
-                    <input type="text">
-                    <button>search</button>
+            </header>
+        </article>
+        <article>
+            <header class="entry-header">
+                <div class="entry-thumbnail">
+                    <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
+                    <a class='portfoliotype' href='#'>[[*{list.userId}]]</a>
+                    <a class='portfoliotype' href='portfolio-category.html'>Golden Retriever </a>
+                    <button type="button"
+                            th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE
+                    </button>
+                    <br>
+                    <label th:text="${list.content}"/><br><br>
+                    <div style="display: flex">
+                        <input type="text" placeholder="Add Comment ..">
+                        <input type="submit">
+                    </div>
                 </div>
-
-            </div>
-            <nav id="site-navigation" class="main-navigation" style="background-color: green;">
-                <button class="menu-toggle">Menu</button>
-                <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-                <div class="menu-menu-1-container">
-                    <ul id="menu-menu-1" class="menu">
-                        <li><a th:href="@{/newStory/main}">New Story</a></li>
-                        <li><a th:href="@{/ttk/ttkMain}">Things To Know</a></li>
-                        <li><a th:href="@{#}">Sharing Info</a></li>
-                        <li><a th:href="@{#}">Talk Talk</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- #masthead -->
-        <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
-            <!--layoout Left-->
-            <div id="A" style="background-color: aqua;">
-                <button id="sideBtn" th:onclick="sideBar()">SideBar</button>
-                <br>
-                <div id="sideBarDiv">
-                    LoginUser = [[${session.loginUser}]] <br>
-                    UserId = [[${session.userId}]]
-                    여기다가 가져와야함
-
-
-                </div>
-            </div>
-
-            <div id="B" class="layout-main" style="background-color: yellow;">
-                <div id="primary" class="content-area column full">
-                    <main id="main" class="site-main">
-
-                        <!--아래 div를 돌리면 밑으로-->
-                        <div th:each="list : ${data}" class="grid portfoliogrid"
-                             style="background-color: burlywood; padding-left: 100px; ">
-                            <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail" style="display: flex">
-                                        <div>
-                                            <a th:href="@{#}"> <!-- mainImage가 들어가야함(제일 첫번째 이미지파일이름) -->
-                                                <img id="imageSite" style="width: 400px; height: 300px"
-                                                     th:src="@{/newStory/download(files=${list.imgName})}">
-                                            </a>
-                                        </div>
-                                        <div><a th:onclick="nextImage([[${list.imgName}]])">&gt; NEXT</a></div>
-                                    </div>
-                                </header>
-                            </article>
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
-                                        <a class='portfoliotype' href='#'>[[*{list.userId}]]</a>
-                                        <a class='portfoliotype' href='portfolio-category.html'>Golden Retriever </a>
-                                        <button type="button"
-                                                th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE
-                                        </button>
-                                        <br>
-                                        <label th:text="${list.content}"/><br><br>
-                                        <div style="display: flex">
-                                            <input type="text" placeholder="Add Comment ..">
-                                            <input type="submit">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                </header>
-                            </article>
-                        </div>
-                        <!-- .grid -->
-
-                        <nav class="pagination">
-                            <span class="page-numbers current">1</span>
-                            <a class="page-numbers" href="#">2</a>
-                            <a class="next page-numbers" href="#">Next »</a>
-                        </nav>
-                        <br/>
-                    </main>
-                </div>
-            </div>
-            <!-- #main -->
-            <!--layout right-->
-            <div id="C" class="layout-right" style="background-color: greenyellow; ">
-                <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> UPLOAD</button>
-                <br>
-                <button th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
-                <br>
-                <button th:onclick="|location.href='@{/user/logout}'|">LOGOUT</button>
-                <br>
-            </div>
-
-        </div>
-        <!-- #primary -->
+                <br><br>
+            </header>
+        </article>
     </div>
-    <!-- #content -->
-</div>
-<!-- .container -->
-<footer id="colophon" class="site-footer">
-    <div class="container">
-        <div class="site-info">
-            <h1 style="font-family: 'Herr Von Muellerhoff';color: #ccc;font-weight:300;text-align: center;margin-bottom:0;margin-top:0;line-height:1.4;font-size: 46px;">
-                Moschino</h1>
-            Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+</th:block>
 
-        </div>
-    </div>
-</footer>
-<a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
-</div>
-<!-- #page -->
-<script th:src='@{/static/js/jquery.js}'></script>
-<script th:src='@{/static/js/plugins.js}'></script>
-<script th:src='@{/static/js/scripts.js}'></script>
-<script th:src='@{/static/js/masonry.pkgd.min.js}'></script>
-</body>
+
 </html>

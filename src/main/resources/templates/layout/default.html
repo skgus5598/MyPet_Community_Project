@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- header fragment -->
+<th:block th:replace="layout/fragments/header :: headerFragment"/>
+<!-- sidebar fragment -->
+<th:block th:replace="layout/fragments/sideBar :: sideFragment"/>
+
+<body>
+
+<div id="page">
+    <div>
+        <header id="masthead" class="site-header">
+            <!-- Search Div -->
+            <div class="site-branding" style="display: flex;">
+                <div>
+                    <h1 class="site-title"><a th:href="@{newStory/main}" rel="home">Trudy</a></h1>
+                    <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
+                </div>
+                <div class="searchDiv">
+                    <input type="text">
+                    <button>search</button>
+                </div>
+            </div>
+            <!-- //Search Div -->
+
+            <!-- navBar -->
+            <nav id="site-navigation" class="main-navigation" style="background-color: green;">
+                <button class="menu-toggle">Menu</button>
+                <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+                <div class="menu-menu-1-container">
+                    <ul id="menu-menu-1" class="menu">
+                        <li><a th:href="@{/newStory/main}">New Story</a></li>
+                        <li><a th:href="@{/ttk/ttkMain}">Things To Know</a></li>
+                        <li><a th:href="@{#}">Sharing Info</a></li>
+                        <li><a th:href="@{/talk/talkMain}">Talk Talk</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- // navBar -->
+        </header>
+        <!-- #masthead -->
+        <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
+            <!--layoout Left-->
+            <div id="A" style="background-color: aqua;">
+                <button id="sideBtn" th:onclick="sideBar()">SideBar</button>
+                <br>
+                <div id="sideBarDiv"></div>
+            </div>
+
+            <!--layout Main -->
+            <div id="B" class="layout-main" style="background-color: yellow;">
+                <div id="primary" class="content-area column full">
+                    <main id="main" class="site-main">
+
+                        <th:block layout:fragment="content"/>
+
+            <!-- paging -->
+                        <nav class="pagination">
+                            <span class="page-numbers current">1</span>
+                            <a class="page-numbers" href="#">2</a>
+                            <a class="next page-numbers" href="#">Next »</a>
+                        </nav>
+                        <br/>
+                    </main>
+                </div>
+            </div>
+
+            <!--layout right-->
+            <div id="C" class="layout-right" style="background-color: greenyellow; ">
+                <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> UPLOAD</button>
+                <br>
+                <button th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
+                <br>
+                <button th:onclick="|location.href='@{/user/logout}'|">LOGOUT</button>
+                <br>
+            </div>
+
+        </div>
+        <!-- #primary -->
+    </div>
+    <!-- #content -->
+</div>
+<th:block th:replace="layout/fragments/footer :: footerFragment"/>
+
+</body>
+
+<th:block th:replace="layout/fragments/script :: scriptFragment"/>
+
+</html>

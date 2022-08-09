@@ -1,30 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th=http://www.thymeleaf.org>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Moschino | Minimalist Free HTML Portfolio by WowThemes.net</title>
-    <!--jquery-->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<html lang="en" xmlns:th=http://www.thymeleaf.org
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce-layout.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce-smallscreen.css}' type='text/css'
-          media='only screen and (max-width: 768px)'/>
-    <link rel='stylesheet' th:href='@{/static/css/woocommerce.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/font-awesome.min.css}' type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/style.css}' type='text/css' media='all'/>
-    <link rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700'
-          type='text/css' media='all'/>
-    <link rel='stylesheet' th:href='@{/static/css/easy-responsive-shortcodes.css}' type='text/css' media='all'/>
-</head>
+<!-- header fragment -->
+<th:block th:replace="layout/fragments/header :: headerFragment"/>
+
 <style>
-    .searchDiv {
-        background-color: orange;
-        width: 80%;
-        padding-top: 50px;
-    }
-
     #content {
         text-align: center;
         padding-top: 100px;
@@ -173,16 +154,11 @@
 <div id="page">
     <div>
         <header id="masthead" class="site-header">
-            <div class="site-branding" style="display: flex;">
+            <div class="site-branding">
                 <div>
                     <h1 class="site-title"><a th:href="@{newStory/main}" rel="home">Trudy</a></h1>
                     <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
                 </div>
-                <div class="searchDiv">
-                    <input type="text">
-                    <button disabled>search</button>
-                </div>
-
             </div>
 
         </header>
@@ -233,22 +209,11 @@
     <!-- #content -->
 </div>
 <!-- .container -->
-<footer id="colophon" class="site-footer">
-    <div class="container">
-        <div class="site-info">
-            <h1 style="font-family: 'Herr Von Muellerhoff';color: #ccc;font-weight:300;text-align: center;margin-bottom:0;margin-top:0;line-height:1.4;font-size: 46px;">
-                Moschino</h1>
-            Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+<th:block th:replace="layout/fragments/footer :: footerFragment" />
 
-        </div>
-    </div>
-</footer>
-<a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
 </div>
-<!-- #page -->
-<script th:src='@{/static/js/jquery.js}'></script>
-<script th:src='@{/static/js/plugins.js}'></script>
-<script th:src='@{/static/js/scripts.js}'></script>
-<script th:src='@{/static/js/masonry.pkgd.min.js}'></script>
+
+<th:block th:replace="layout/fragments/script :: scriptFragment"/>
+
 </body>
 </html>

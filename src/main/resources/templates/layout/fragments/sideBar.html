@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--headerFragment 선언-->
+<th:block th:fragment="sideFragment">
+
+    <script>
+        //즉시실행함수
+        $(function () {
+            $.ajax({
+                url: "/user/userInfo",
+                type: "get",
+                dataType: "JSON",
+                success: function (list) {
+                    var html = "";
+                    list.forEach((item) => {
+                        html += "<img src='/files/download?files=" + item.imgName + "'><br>"
+                        html += "<div>Trudy Name :: " + item.trudyName + "</div>";
+                        html += "<div>Age :: " + item.trudyAge + "</div>";
+                        html += "<div>Gender :: " + item.trudyGender + "</div>";
+                        html += "<div>Intro ::" + item.trudyIntro + "</div>";
+                        html += "<hr>";
+                        $("#sideBarDiv").html(html);
+                    })
+                },
+                error: function () {
+                    alert("server Error");
+                }
+            })
+        })
+
+        var isBool = true;
+
+        function sideBar() {
+            if (isBool == true) {
+                $("#sideBarDiv").hide();
+                $('#A').animate({width: 50});
+                $('#B').animate({width: '80%'});
+                isBool = false;
+            } else {
+                $("#sideBarDiv").show();
+                $('#A').animate({width: '20%'});
+                $('#B').animate({width: '60%'});
+                isBool = true;
+            }
+        }
+    </script>
+</th:block>
+</html>

@@ -3,6 +3,7 @@ package com.rainaq.mypet.myPage.service;
 import com.rainaq.mypet.common.imgFiles.FileService;
 import com.rainaq.mypet.myPage.entity.Trudy;
 import com.rainaq.mypet.myPage.repository.MyPageRepository;
+import com.rainaq.mypet.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,8 +35,9 @@ public class MyPageServiceImpl implements MyPageService{
     }
 
     @Override
-    public List<Trudy> getList() {
-        return repo.findAll();
+    public List<Trudy> getList(String userId) {
+        UserEntity dto = repo.findAllByUserId(userId);
+        return dto.getTrudyList();
     }
 
     @Override

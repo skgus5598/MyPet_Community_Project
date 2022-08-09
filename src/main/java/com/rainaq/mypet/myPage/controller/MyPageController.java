@@ -2,12 +2,14 @@ package com.rainaq.mypet.myPage.controller;
 
 import com.rainaq.mypet.myPage.entity.Trudy;
 import com.rainaq.mypet.myPage.service.MyPageServiceImpl;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -30,9 +32,10 @@ public class MyPageController {
 
     @GetMapping("getTrudyList")
     @ResponseBody
-    public List<Trudy> getTrudyList(){
-        return mpService.getList();
-
+    public List<Trudy> getTrudyList(HttpSession session){
+        Object userId = session.getAttribute("userId");
+        List<Trudy> list = mpService.getList((String)userId);
+        return list;
     }
 
     @DeleteMapping(value = "deleteTrudy", produces = "application/json;charset=utf-8")
