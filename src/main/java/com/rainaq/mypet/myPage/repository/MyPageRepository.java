@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MyPageRepository extends JpaRepository<Trudy, Integer> {
 
-    UserEntity findAllByUserId(String userId);
+    List<Trudy> findAllByUser(UserEntity userId);
 }

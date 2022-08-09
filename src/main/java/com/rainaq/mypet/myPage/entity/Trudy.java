@@ -41,7 +41,8 @@ public class Trudy {
     @JsonBackReference // 순환참조 제거 // 자식클래스, 연관관계의 주인(외래키가 있는 곳)
     @ManyToOne(fetch = FetchType.EAGER) // Many = many, User = one // EAGER전략, 바로 가져옴
     @JoinColumn(name = "user_id")
-    private UserEntity userId;
+//    private UserEntity userId;
+    private UserEntity user;
 
     @Column(name = "img_name")
     private String imgName;

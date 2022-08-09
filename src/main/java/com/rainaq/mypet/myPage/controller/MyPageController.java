@@ -33,9 +33,11 @@ public class MyPageController {
     @GetMapping("getTrudyList")
     @ResponseBody
     public List<Trudy> getTrudyList(HttpSession session){
-        Object userId = session.getAttribute("userId");
-        List<Trudy> list = mpService.getList((String)userId);
-        return list;
+        String str = (String)session.getAttribute("userId");
+        UserEntity user = new UserEntity();
+        user.setUserId(str);
+        return mpService.getList(user);
+
     }
 
     @DeleteMapping(value = "deleteTrudy", produces = "application/json;charset=utf-8")
@@ -48,7 +50,6 @@ public class MyPageController {
     @PostMapping("insertForm")
     @ResponseBody
     public void addTrudyForm(@RequestParam("file") MultipartFile file, Trudy dto ){
-        System.out.println("loginUser ? " + dto.getUserId());
         mpService.insertForm(file, dto);
 
     }

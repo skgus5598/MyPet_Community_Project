@@ -27,7 +27,7 @@ public class UserEntity {
     private String userPwd;
 
     @JsonManagedReference // 순환참조제거 // 부모클래스, 연관 관계 주인의 반대편
-    @OneToMany(mappedBy = "userId") // 'mappedBy'가 적혀있으면 연관관계의 주인이 아님(난 FK가 아니다)DB에 컬럼을 만들지 마세요
+    @OneToMany(mappedBy = "user") // 'mappedBy'가 적혀있으면 연관관계의 주인이 아님(난 FK가 아니다)DB에 컬럼을 만들지 마세요
     private List<Trudy> trudyList;
 
 }

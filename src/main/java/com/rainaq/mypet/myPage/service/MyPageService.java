@@ -9,8 +9,7 @@ import java.util.List;
 public interface MyPageService {
     void insertForm(MultipartFile file, Trudy dto);
 
-    List<Trudy> getList(String userId);
+    List<Trudy> getList(UserEntity userId);
 
     void delTrudy(int trudyId, String imgName);
-
 }

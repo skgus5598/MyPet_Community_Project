@@ -35,9 +35,8 @@ public class MyPageServiceImpl implements MyPageService{
     }
 
     @Override
-    public List<Trudy> getList(String userId) {
-        UserEntity dto = repo.findAllByUserId(userId);
-        return dto.getTrudyList();
+    public List<Trudy> getList(UserEntity user) {
+        return repo.findAllByUser(user);
     }
 
     @Override
