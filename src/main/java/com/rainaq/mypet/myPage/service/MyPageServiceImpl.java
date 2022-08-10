@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -26,10 +27,14 @@ public class MyPageServiceImpl implements MyPageService{
 
 
     @Override
-    public void insertForm(MultipartFile file, Trudy dto) {
+    public void insertForm(MultipartFile file, Trudy dto, HttpSession session) {
+        UserEntity user = new UserEntity();
+        user.setUserId((String)session.getAttribute("userId"));
+        dto.setUser(user);
 
         String imgName = fileService.insertImgOne(file);
         dto.setImgName(imgName);
+
 
         repo.save(dto);
     }
