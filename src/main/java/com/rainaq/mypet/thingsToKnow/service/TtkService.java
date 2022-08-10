@@ -13,5 +13,5 @@ public interface TtkService {
 
     public void boardDetail(Model model, int boardId);
 
-    List<TtkBoard> getHealthList(int categoryId);
+    List<TtkBoard> getMenuList(int categoryId);
 }

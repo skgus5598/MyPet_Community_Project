@@ -34,7 +34,6 @@
                 if (data.result == true) {
                     alert("delete success");
                     location.href = "/newStory/main";
-
                 } else {
                     alert("delete fail")
                 }
@@ -45,8 +44,6 @@
         })
     };
 </script>
-
-
 
     <div th:each="list : ${data}" class="grid portfoliogrid"
          style="background-color: burlywood; padding-left: 100px; ">

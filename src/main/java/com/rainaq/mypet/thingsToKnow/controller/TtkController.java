@@ -35,7 +35,7 @@ public class TtkController {
     @GetMapping(value = "getMenuList", produces = "application/json;charset=utf-8")
     @ResponseBody
     public  List<TtkBoard> getMenuList(@RequestParam("num") int categoryId){
-        return  tService.getHealthList(categoryId);
+        return  tService.getMenuList(categoryId);
     }
 
 
@@ -59,7 +59,6 @@ public class TtkController {
 
     @GetMapping("boardDetail")
     public String boardDetail(@RequestParam("boardId") int boardId, Model model){
-        log.info("##### boardId ::" + boardId);
         tService.boardDetail(model, boardId);
         return "/thingsToKnow/ttkDetail";
     }

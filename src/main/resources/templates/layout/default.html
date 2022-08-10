@@ -15,12 +15,12 @@
         <header id="masthead" class="site-header">
             <!-- Search Div -->
             <div class="site-branding" style="display: flex;">
-                <div>
+                <div style="width: 40%">
                     <h1 class="site-title"><a th:href="@{newStory/main}" rel="home">Trudy</a></h1>
                     <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
                 </div>
                 <div class="searchDiv">
-                    <input type="text">
+                    <input type="text" style="width: 80%" placeholder="검색어를 입력하세요">
                     <button>search</button>
                 </div>
             </div>
@@ -70,7 +70,7 @@
 
             <!--layout right-->
             <div id="C" class="layout-right" style="background-color: greenyellow; ">
-                <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> UPLOAD</button>
+                <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> NEWSTORY<br>UPLOAD</button>
                 <br>
                 <button th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
                 <br>

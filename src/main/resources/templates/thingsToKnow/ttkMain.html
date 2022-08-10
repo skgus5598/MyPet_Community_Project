@@ -20,7 +20,7 @@
             text-align: center;
             background-color: aquamarine;
             display: flex;
-            flex-wrap: wrap; /*행을 다 채우면 다음 행으로 개행*/
+            flex-wrap: wrap;    /*    행을 다 채우면 다음 행으로 개행*/
             width: 100%;
         }
         .story-contents img {
@@ -66,22 +66,21 @@
             })
         }
 
-
         function makeList(list){
             var html ="";
+            html += "<div class='story-contents'>";
             list.forEach((item)=>{
-                html += "<div class='story-contents'>";
                 html += "<div class ='sContents'>"
                 html += "<a href='/ttk/boardDetail?boardId="+item.boardId+"'>"
                 html += "<img src='/files/download?files=" + item.imgName + "'><br>"
                 html += "<label>"+item.categoryId+"</label><br>"
                 html += "<label>"+item.boardTitle+"</label>"
                 html += "</a>"
-                html += "</div></div>";
+                html += "</div><br><br>";
             });
+            html += "</div>"
             $("#makeList").html(html);
         }
-
     </script>
 
     <div id="divHead">
@@ -118,7 +117,8 @@
     </div>
     <br><br>
 
-    <div id="makeList" />
+    <div id="makeList" >
+    </div>
 
 
 </th:block>

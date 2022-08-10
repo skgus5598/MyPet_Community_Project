@@ -47,7 +47,6 @@ public class TtkServiceImpl implements TtkService {
     @Override
     public List<TtkBoard> getAllList() {
         List<TtkBoard> list =  repo.findAll();
-   //     model.addAttribute("data", list);
         return list;
 
     }
@@ -59,7 +58,7 @@ public class TtkServiceImpl implements TtkService {
     }
 
     @Override
-    public List<TtkBoard> getHealthList(int categoryId) {
+    public List<TtkBoard> getMenuList(int categoryId) {
         return repo.findAllByCategoryId(categoryId);
     }
 
