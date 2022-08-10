@@ -45,8 +45,7 @@
     };
 </script>
 
-    <div th:each="list : ${data}" class="grid portfoliogrid"
-         style="background-color: burlywood; padding-left: 100px; ">
+    <div th:each="list : ${data}" class="grid portfoliogrid" style="padding-left: 100px; ">
         <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
             <header class="entry-header">
                 <div class="entry-thumbnail" style="display: flex">
@@ -56,7 +55,7 @@
                                  th:src="@{/newStory/download(files=${list.imgName})}">
                         </a>
                     </div>
-                    <div><a th:onclick="nextImage([[${list.imgName}]])">&gt; NEXT</a></div>
+                    <div><a th:onclick="nextImage([[${list.imgName}]])"> NEXT</a></div>
                 </div>
             </header>
         </article>

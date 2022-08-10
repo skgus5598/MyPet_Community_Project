@@ -8,6 +8,39 @@
 <!-- sidebar fragment -->
 <th:block th:replace="layout/fragments/sideBar :: sideFragment"/>
 
+<style>
+    .w-btn {
+        position: relative;
+        border: none;
+        display: inline-block;
+        padding: 15px 30px;
+        border-radius: 15px;
+        font-family: "paybooc-Light", sans-serif;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.25s;
+    }
+    .w-btn-indigo {
+        background-color: aliceblue;
+        color: #1e6b7b;
+    }
+    .w-btn-indigo:hover {
+        letter-spacing: 2px;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+    #sideBarDiv, #sideBtn{
+        margin-left: 15px;
+    }
+    #C button{
+        position: sticky;
+        top: 200px;
+        right: 300px;
+    }
+
+</style>
+
 <body>
 
 <div id="page">
@@ -27,11 +60,11 @@
             <!-- //Search Div -->
 
             <!-- navBar -->
-            <nav id="site-navigation" class="main-navigation" style="background-color: green;">
+            <nav id="site-navigation" class="main-navigation" style="background-color: #F6F1F2;">
                 <button class="menu-toggle">Menu</button>
                 <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
                 <div class="menu-menu-1-container">
-                    <ul id="menu-menu-1" class="menu">
+                    <ul id="menu-menu-1" class="menu" >
                         <li><a th:href="@{/newStory/main}">New Story</a></li>
                         <li><a th:href="@{/ttk/ttkMain}">Things To Know</a></li>
                         <li><a th:href="@{#}">Sharing Info</a></li>
@@ -42,9 +75,9 @@
             <!-- // navBar -->
         </header>
         <!-- #masthead -->
-        <div id="content" class="site-content" style="background-color: blueviolet; display: flex;">
+        <div id="content" class="site-content" style="display: flex;">
             <!--layoout Left-->
-            <div id="A" style="background-color: aqua;">
+            <div id="A">
                 <button id="sideBtn" th:onclick="sideBar()">SideBar</button>
                 <br>
                 <div id="sideBarDiv"></div>
@@ -69,13 +102,13 @@
             </div>
 
             <!--layout right-->
-            <div id="C" class="layout-right" style="background-color: greenyellow; ">
-                <button style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> NEWSTORY<br>UPLOAD</button>
-                <br>
-                <button th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
-                <br>
-                <button th:onclick="|location.href='@{/user/logout}'|">LOGOUT</button>
-                <br>
+            <div id="C" class="layout-right">
+                <button class="w-btn w-btn-indigo" style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> NEWSTORY<br>UPLOAD</button>
+                <br><br>
+                <button class="w-btn w-btn-indigo" th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
+                <br><br>
+                <button class="w-btn w-btn-indigo" th:onclick="|location.href='@{/user/logout}'|">LOGOUT</button>
+                <br><br>
             </div>
 
         </div>
