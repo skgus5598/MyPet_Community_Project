@@ -45,16 +45,22 @@ public class TtkServiceImpl implements TtkService {
     }
 
     @Override
-    public void getAllList(Model model) {
+    public List<TtkBoard> getAllList() {
         List<TtkBoard> list =  repo.findAll();
+   //     model.addAttribute("data", list);
+        return list;
 
-        model.addAttribute("data", list);
     }
 
     @Override
     public void boardDetail(Model model, int boardId) {
         TtkBoard dto = repo.findByBoardId(boardId);
         model.addAttribute("dto", dto);
+    }
+
+    @Override
+    public List<TtkBoard> getHealthList(int categoryId) {
+        return repo.findAllByCategoryId(categoryId);
     }
 
 

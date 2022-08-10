@@ -8,7 +8,7 @@ import java.util.List;
 public interface TtkRepository extends JpaRepository<TtkBoard,Integer> {
 
     List<TtkBoard> findAll();
-
     TtkBoard findByBoardId(int boardId);
 
+    List<TtkBoard> findAllByCategoryId(int categoryId);
 }

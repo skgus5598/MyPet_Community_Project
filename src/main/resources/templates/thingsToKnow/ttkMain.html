@@ -9,14 +9,12 @@
             width: 100px;
             height: 100px;
         }
-
         #main-title {
             display: flex;
             background-color: red;
             width: 100%;
             height: 100px;
         }
-
         .story-contents {
             justify-content: center;
             text-align: center;
@@ -25,36 +23,102 @@
             flex-wrap: wrap; /*행을 다 채우면 다음 행으로 개행*/
             width: 100%;
         }
-
         .story-contents img {
             width: 200px;
             height: 200px;
         }
-
         .sContents {
             border: 2px solid black;
             margin-right: 30px;
         }
-
+        #divHead{display: flex}
     </style>
 
+    <script>
+        //즉시실행함수
+        $(function (){
+            getAllList();
+        });
 
-    <a th:href="@{#}">ALL</a>
-    <a th:href="@{#}">HEALTH</a>
-    <a th:href="@{#}">EDUCATION</a>
-    <a th:href="@{#}">BREED</a>
-    <a th:href="@{/ttk/addForm}">+ADD</a>
+        function getAllList (){
+            $.ajax({
+                url : "/ttk/ttkAllList",
+                type : "GET",
+                dataType: "JSON",
+                success : function(list){
+                    makeList(list);
+                },error : function (){
+                    alert("SERVER ERROR")
+                }
+            });
+        };
 
-    <div class="story-contents" th:each="list : ${data}">
-        <div class="sContents">
-            <a th:href="@{/ttk/boardDetail(boardId=${list.boardId})}">
-                <img th:src="@{/files/download(files=${list.imgName})}"><br>
-                <label>[[${list.categoryId}]] </label><br>
-                <label>[[${list.boardTitle}]]</label>
+        function getMenuList(num){
+            $.ajax({
+                url : "/ttk/getMenuList?num="+num,
+                type : "GET",
+                dataType: "JSON",
+                success : function (list){
+                    makeList(list);
+                }, error : function (){
+                    alert("SERVER ERROR");
+                }
+            })
+        }
+
+
+        function makeList(list){
+            var html ="";
+            list.forEach((item)=>{
+                html += "<div class='story-contents'>";
+                html += "<div class ='sContents'>"
+                html += "<a href='/ttk/boardDetail?boardId="+item.boardId+"'>"
+                html += "<img src='/files/download?files=" + item.imgName + "'><br>"
+                html += "<label>"+item.categoryId+"</label><br>"
+                html += "<label>"+item.boardTitle+"</label>"
+                html += "</a>"
+                html += "</div></div>";
+            });
+            $("#makeList").html(html);
+        }
+
+    </script>
+
+    <div id="divHead">
+        <div style="text-align: center;">
+            <a th:onclick="'javascript:getAllList()'" >
+                <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                <b>ALL</b>
             </a>
-            <br><br>
+        </div>
+        <div style="text-align: center;">
+            <a th:onclick=" 'javascript:getMenuList(1)' ">
+                <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                <b>HEALTH</b>
+            </a>
+        </div>
+        <div style="text-align: center;">
+            <a th:onclick=" 'javascript:getMenuList(2)' ">
+                <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                <b>EDUCATION</b>
+            </a>
+        </div>
+        <div style="text-align: center;">
+            <a th:onclick=" 'javascript:getMenuList(3)' ">
+                <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                <b>BREED</b>
+            </a>
+        </div>
+        <div style="text-align: center;">
+            <a th:href="@{/ttk/addForm}">
+                <img src="https://cdn-icons-png.flaticon.com/128/7973/7973168.png"> <br>
+                <b>+ADD</b>
+            </a>
         </div>
     </div>
+    <br><br>
+
+    <div id="makeList" />
 
 
 </th:block>

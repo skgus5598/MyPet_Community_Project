@@ -24,10 +24,20 @@ public class TtkController {
     CategoryRepo categoryRepo;
 
     @GetMapping("ttkMain")
-    public String ttkMain(Model model){
-        tService.getAllList(model);
+    public String ttkMainPage(){
         return "thingsToKnow/ttkMain";
     }
+    @GetMapping(value = "ttkAllList", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public  List<TtkBoard> ttkAllList(){
+        return  tService.getAllList();
+    }
+    @GetMapping(value = "getMenuList", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public  List<TtkBoard> getMenuList(@RequestParam("num") int categoryId){
+        return  tService.getHealthList(categoryId);
+    }
+
 
     @GetMapping("addForm")
     public String addForm(){
