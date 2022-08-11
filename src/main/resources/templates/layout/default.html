@@ -20,8 +20,10 @@
         text-decoration: none;
         font-weight: 600;
         transition: 0.25s;
+        width: 135px;
     }
     .w-btn-indigo {
+
         background-color: aliceblue;
         color: #1e6b7b;
     }
@@ -33,13 +35,22 @@
     #sideBarDiv, #sideBtn{
         margin-left: 15px;
     }
-    #C button{
-        position: sticky;
-        top: 200px;
-        right: 300px;
-    }
+
+    /* 스크롤 따라다니는 버튼  */
+    /* Child Element*/
+    #C{position: absolute; margin-left: 80%; padding-left: 15px }
 
 </style>
+<script>
+    //스크롤 움직임 조정
+    $(document).ready(function(){
+        var currentPosition = parseInt($("#C").css("top"));
+        $(window).scroll(function() {
+            var position = $(window).scrollTop();
+            $("#C").stop().animate({"top":position+currentPosition+"px"},1000);
+        });
+    });
+</script>
 
 <body>
 
@@ -103,12 +114,12 @@
 
             <!--layout right-->
             <div id="C" class="layout-right">
-                <button class="w-btn w-btn-indigo" style="color: blue;" th:onclick="|location.href='@{/newStory/addForm}'|"> NEWSTORY<br>UPLOAD</button>
-                <br><br>
-                <button class="w-btn w-btn-indigo" th:onclick="|location.href='@{/myPage/myHome}'|"> MYPAGE</button>
-                <br><br>
-                <button class="w-btn w-btn-indigo" th:onclick="|location.href='@{/user/logout}'|">LOGOUT</button>
-                <br><br>
+                    <button class="w-btn w-btn-indigo" th:onclick="|location.href='@{/newStory/addForm}'|">UPLOAD<br>NEW<br>STORY</button>
+                    <br><br>
+                    <button class="w-btn w-btn-indigo" th:onclick="|location.href='@{/myPage/myHome}'|">MY<br>PAGE</button>
+                    <br><br>
+                    <button class="w-btn w-btn-indigo" th:onclick="|location.href='@{/user/logout}'|">LOGOUT</button>
+                    <br><br>
             </div>
 
         </div>

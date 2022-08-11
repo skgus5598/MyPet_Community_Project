@@ -40,12 +40,15 @@
         function sideBar() {
             if (isBool == true) {
                 $("#sideBarDiv").hide();
-                $('#A').animate({width: 50});
+                $('#A').animate({width: '5%'});
                 $('#B').animate({width: '80%'});
+                $("#C").animate({marginLeft : '85%'})
                 isBool = false;
             } else {
+                $("#A").show();
                 $('#A').animate({width: '20%'});
                 $('#B').animate({width: '60%'});
+                $("#C").animate({marginLeft : '80%'})
                 $("#sideBarDiv").show();
                 isBool = true;
             }
