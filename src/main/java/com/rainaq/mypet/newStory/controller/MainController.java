@@ -42,22 +42,22 @@ public class MainController {
         return "redirect:main";
     }
 
-    @GetMapping("download")
-    public void download(@RequestParam("files") String dbFileName, HttpServletResponse response)throws Exception{
-    //    response.addHeader("Content-disposition", "attachment;filenAME="+dbFileName);
-        String[] imgName = dbFileName.split("//");
-        System.out.println("imgName ? " + Arrays.toString(imgName));
-        for(String img :imgName){
-//            File file = new File("/Users/raina/Desktop/mppImg/"+img);
-            File file = new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+img);
-
-            System.out.println(file.getName());
-
-            FileInputStream fis = new FileInputStream(file);
-            FileCopyUtils.copy(fis, response.getOutputStream());
-            fis.close();
-        }
-    }
+//    @GetMapping("download")
+//    public void download(@RequestParam("files") String dbFileName, HttpServletResponse response)throws Exception{
+//    //    response.addHeader("Content-disposition", "attachment;filenAME="+dbFileName);
+//        String[] imgName = dbFileName.split("//");
+//        System.out.println("imgName ? " + Arrays.toString(imgName));
+//        for(String img :imgName){
+////            File file = new File("/Users/raina/Desktop/mppImg/"+img);
+//            File file = new File("C:/Users/inosoft-5/Desktop/MyPet_Community_Project/board_image/"+img);
+//
+//            System.out.println(file.getName());
+//
+//            FileInputStream fis = new FileInputStream(file);
+//            FileCopyUtils.copy(fis, response.getOutputStream());
+//            fis.close();
+//        }
+//    }
 
     @DeleteMapping(value = "deleteBoard", produces = "application/json;charset=utf-8")
     @ResponseBody
