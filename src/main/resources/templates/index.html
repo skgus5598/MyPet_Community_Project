@@ -65,22 +65,40 @@
         })
     }
 
-    function showReply(){
-        $.ajax({
-            url : "/newStory/getAllReply",
-            type : "GET",
-            dataType: "JSON",
-            success : function (list){
-                console.log("list :: " + list);
-                list.forEach((data)=>{
-                    console.log("content ::" +data.repContent);
-                    console.log("userID ::  " + data.repUserId);
-                    console.log("BOARDiD :: " + data.board.boardId);
-                })
-            }, error : function (){
-                alert("server error");
-            }
-        })
+    var replyBool = true;
+    function showReply(boardId){
+        if(replyBool == true){
+            $("#showReply").show();
+            $("#showReply").animate({height: '30%'});
+
+
+
+            $.ajax({
+                url : "/newStory/getAllReply?board="+boardId,
+                type : "GET",
+                dataType: "JSON",
+                success : function (list){
+                    var html = "";
+                    html += "<table>";
+                    list.forEach((data)=>{
+                        console.log(JSON.stringify(data));
+                        html +="<tr>";
+                        html +="<td>"+data.repUserId+"</td>";
+                        html +="<td>"+data.repContent+"</td>";
+                        html +="</tr>";
+                    })
+                    html +="</table>";
+                    $("#showReply").html(html);
+                    replyBool = false;
+                }, error : function (){
+                    alert("server error");
+                }
+            })
+        }else{
+            $("#showReply").hide();
+            replyBool = true;
+        }
+
     }
 
 
@@ -88,7 +106,7 @@
 
 </script>
 
-    <div th:each="list, i : ${data}" class="grid portfoliogrid" style="padding-left: 10%; ">
+    <div th:each="list, i : ${data}"  style="padding-left: 10%; ">
         <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
             <header class="entry-header">
                 <div class="entry-thumbnail" style="display: flex">
@@ -112,11 +130,14 @@
                     <button th:type="button"
                             th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE
                     </button>
+                    <div>
+                        <button th:onclick="showReply([[${list.boardId}]])">댓글 펼치기</button>
+                    </div>
+                    <div id="showReply" ></div>
                     <div style="display: flex">
                         <input id="repContent" th:type="text" placeholder="Add Comment ..">
-                        <button th:type="button" th:onclick="addReply([[${list.boardId}]])"/>
+                        <button th:type="button" th:onclick="addReply([[${list.boardId}]])">댓글등록</button>
                     </div>
-                    <div id="showReply" />
                 </div>
                 <br><br>
             </header>

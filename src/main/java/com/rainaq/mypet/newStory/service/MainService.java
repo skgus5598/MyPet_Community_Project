@@ -15,5 +15,5 @@ public interface MainService {
 
     void addReply(MainReply dto);
 
-    List<MainReply> getReplyList();
+    List<MainReply> getReplyList(MainBoard board);
 }

@@ -77,11 +77,11 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public List<MainReply> getReplyList() {
-        List<MainReply> list = replyRepo.findAll();
+    public List<MainReply> getReplyList(MainBoard board) {
+        List<MainReply> list = replyRepo.findAllByBoard(board);
         list.forEach(s -> System.out.println(s.getBoard().getBoardId()));
         System.out.println("list :: " +list.toString());
-        return replyRepo.findAll();
+        return replyRepo.findAllByBoard(board);
     }
 
 

@@ -61,8 +61,8 @@ public class MainController {
 
     @GetMapping(value = "getAllReply", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<MainReply> getAllReply(){
-        return mainService.getReplyList();
+    public List<MainReply> getAllReply(@RequestParam MainBoard board){
+        return mainService.getReplyList(board);
     }
 
 
