@@ -15,8 +15,8 @@
         <img th:src="@{/files/download(files=${dto.imgName})}"><br>
     </div>
     <div>
-        <label>카테고리번호 : [[${dto.categoryId}]]</label>
-        <h2 class="entry-title"><a href="#" rel="bookmark">[[${dto.userId}]]</a></h2>
+        <label>CATEGORY NAME : [[${dto.category.categoryName}]]</label>
+        <h2 class="entry-title"><a href="#" rel="bookmark">[[${dto.user.userId}]]</a></h2>
 
         <label th:text="${dto.boardTitle}"/>
         <textarea th:name="boardContent">[[${dto.boardContent}]] </textarea>

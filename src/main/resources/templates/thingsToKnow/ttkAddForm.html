@@ -29,17 +29,20 @@
     }
 
     function getCategory() {
+        $("#categoryList2").show();
+
         $.ajax({
             url: "/ttk/getCategory",
             type: "GET",
             dataType: "JSON",
             success: function (data) {
                 var html = "";
+                html += "<option value=''> == SELECT CATEGORY == </option>"
                 for (var i = 0; i < data.length; i++) {
-                    //   html += "<option th:selected='"+data[i]+" == "+data[i]+"'  th:value="+data[i]+">"+ data[i]+"</option>" //selected 옵션 넣기
                     html += "<option value='" + (i + 1) + " '>" + data[i] + "</option>" //selected 옵션 넣기
                 }
-                $("#categoryList").html(html);
+                html += "<br>"
+                $("#categoryList2").html(html);
             },
             error: function () {
                 alert("오류발생");
@@ -56,13 +59,13 @@
                 <img id="preview">
                 <input type="file" th:multiple="multiple" name="file" id="file_0" class="upload-hidden"
                        onchange="readURL(this)"/>
+            </a>
         </div>
         <div>
-            <select id="categoryList" th:onclick="getCategory()" th:name="categoryId">
-                <option>카테고리선택</option>
-            </select>
-            <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
-            <input type="hidden" th:name="userId" th:value="${session.userId}">
+            <a id="categoryList" th:onclick="getCategory()" > SELECT CATEGORY!! (click) </a> <br>
+            <select id="categoryList2" style="display: none" th:name="category" /><br>
+
+            <input type="hidden" th:name="user" th:value="${session.userId}">
             <input type="text" th:name="boardTitle" placeholder="제목을 입력하세요">
             <textarea th:name="boardContent" placeholder="write here!"></textarea>
             <input type="submit" th:value="register">

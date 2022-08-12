@@ -1,5 +1,6 @@
 package com.rainaq.mypet.thingsToKnow.controller;
 
+import com.rainaq.mypet.common.boardCategory.BoardCategory;
 import com.rainaq.mypet.common.boardCategory.CategoryRepo;
 import com.rainaq.mypet.thingsToKnow.entity.TtkBoard;
 import com.rainaq.mypet.thingsToKnow.service.TtkServiceImpl;
@@ -32,12 +33,12 @@ public class TtkController {
     public  List<TtkBoard> ttkAllList(){
         return  tService.getAllList();
     }
+
     @GetMapping(value = "getMenuList", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public  List<TtkBoard> getMenuList(@RequestParam("num") int categoryId){
-        return  tService.getMenuList(categoryId);
+    public  List<TtkBoard> getMenuList(@RequestParam("num") BoardCategory category){
+        return  tService.getMenuList(category);
     }
-
 
     @GetMapping("addForm")
     public String addForm(){
@@ -62,5 +63,12 @@ public class TtkController {
         tService.boardDetail(model, boardId);
         return "/thingsToKnow/ttkDetail";
     }
+
+    @DeleteMapping(value = "deleteBoard", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String deleteBoard(@RequestParam int boardId, @RequestParam String imgName ){
+        return tService.deleteBoard(boardId, imgName);
+    }
+
 
 }

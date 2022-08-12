@@ -77,14 +77,40 @@
                 html += "<div class ='sContents'>"
                 html += "<a href='/ttk/boardDetail?boardId="+item.boardId+"'>"
                 html += "<img src='/files/download?files=" + item.imgName + "'><br>"
-                html += "<label>"+item.categoryId+"</label><br>"
+                html += "<label>"+item.category.categoryName+"</label><br>"
                 html += "<label>"+item.boardTitle+"</label>"
-                html += "</a>"
+                html += "</a><br>"
+                html += "<button onclick='delContent("+item.boardId+",\""+item.imgName+"\")'>DELETE</button>";
                 html += "</div><br><br>";
             });
             html += "</div>"
             $("#makeList").html(html);
         }
+
+        function delContent(boardId, imgName){
+            if(!confirm("정말 삭제하시겠습니까?")) {
+                return false;
+            }else{
+                $.ajax({
+                    url: "/ttk/deleteBoard?boardId=" + boardId + "&imgName=" + imgName,
+                    type: "DELETE",
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data.result == true) {
+                            alert("delete success");
+                            location.href = "/ttk/ttkMain";
+                        } else {
+                            alert("delete fail")
+                        }
+                    },
+                    error: function () {
+                        alert("server - fail");
+                    }
+                })
+            }
+        }
+
+
     </script>
 
     <div id="divHead">

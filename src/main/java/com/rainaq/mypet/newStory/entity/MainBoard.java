@@ -22,6 +22,7 @@ public class MainBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference  //순환참조 제거 // 연관관계의 부모클래스가 있는 컬럼 //
     @Column(name = "board_id")
     private int boardId;
 
@@ -42,6 +43,8 @@ public class MainBoard {
     @ColumnDefault("0") // default value = 0
     private int likeNo;
 
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    private List<MainReply> reply;
 
 
 }

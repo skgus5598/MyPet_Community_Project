@@ -1,5 +1,7 @@
 package com.rainaq.mypet.thingsToKnow.entity;
 
+import com.rainaq.mypet.common.boardCategory.BoardCategory;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,11 +22,13 @@ public class TtkBoard {
     @Column(name="board_id")
     private int boardId;
 
-    @Column(name="board_category_id")
-    private int categoryId;
+    @OneToOne
+    @JoinColumn(name="board_category_id")  // fk
+    private BoardCategory category;
 
-    @Column(name="user_id")
-    private String userId;
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private UserEntity user;
 
     @Column(name="board_title")
     private String boardTitle;

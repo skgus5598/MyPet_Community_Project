@@ -47,9 +47,48 @@
             })
         }
     };
+
+    function addReply(boardId){
+        $.ajax({
+            url : "/newStory/addReply",
+            type : "POST",
+            data: {
+                board : boardId,
+                repContent: $("#repContent").val()
+            },
+            success : function (){
+                alert("success")
+                showReply();
+            },error : function (){
+                alert("server--error");
+            }
+        })
+    }
+
+    function showReply(){
+        $.ajax({
+            url : "/newStory/getAllReply",
+            type : "GET",
+            dataType: "JSON",
+            success : function (list){
+                console.log("list :: " + list);
+                list.forEach((data)=>{
+                    console.log("content ::" +data.repContent);
+                    console.log("userID ::  " + data.repUserId);
+                    console.log("BOARDiD :: " + data.board.boardId);
+                })
+            }, error : function (){
+                alert("server error");
+            }
+        })
+    }
+
+
+
+
 </script>
 
-    <div th:each="list, i : ${data}" class="grid portfoliogrid" style="padding-left: 100px; ">
+    <div th:each="list, i : ${data}" class="grid portfoliogrid" style="padding-left: 10%; ">
         <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
             <header class="entry-header">
                 <div class="entry-thumbnail" style="display: flex">
@@ -63,20 +102,21 @@
                 </div>
             </header>
         </article>
-        <article>
+        <article style="width: 70%">
             <header>
                 <div >
                     <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
-                    <a href='#'> @[[*{list.user.userId}]] / [[${list.trudy.trudyName}]]</a>
+                    <a th:href='@{#}'> @[[*{list.user.userId}]] / [[${list.trudy.trudyName}]]</a>
                     <br>
                     <label th:text="${list.content}"/><br>
-                    <button type="button"
+                    <button th:type="button"
                             th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE
                     </button>
                     <div style="display: flex">
-                        <input type="text" placeholder="Add Comment ..">
-                        <input type="submit">
+                        <input id="repContent" th:type="text" placeholder="Add Comment ..">
+                        <button th:type="button" th:onclick="addReply([[${list.boardId}]])"/>
                     </div>
+                    <div id="showReply" />
                 </div>
                 <br><br>
             </header>

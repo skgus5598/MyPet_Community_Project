@@ -2,7 +2,9 @@ package com.rainaq.mypet.newStory.service;
 
 import com.rainaq.mypet.common.imgFiles.FileService;
 import com.rainaq.mypet.newStory.entity.MainBoard;
+import com.rainaq.mypet.newStory.entity.MainReply;
 import com.rainaq.mypet.newStory.mapper.MainMapper;
+import com.rainaq.mypet.newStory.repository.MainReplyRepository;
 import com.rainaq.mypet.newStory.repository.MainRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,8 @@ import java.util.List;
 public class MainServiceImpl implements MainService {
 
     private final MainRepository repository; // 의존성주입(@Autowired 대신 private final + 생성자)
+    private final MainReplyRepository replyRepo;
+
     private final MainMapper mapper;
 
     private final FileService fileService;
@@ -33,10 +37,15 @@ public class MainServiceImpl implements MainService {
         // list 찍어보기
 
         list.forEach(s ->
-                System.out.println("trudy id :: "+ s.getTrudy().getTrudyName() +"//"+s.getUser().getUserId() +"// " + s.getTrudy().getTrudyId())
+                System.out.println("trudy id :: "
+                        + s.getTrudy().getTrudyName()
+                        +"//"+s.getUser().getUserId()
+                        +"// " + s.getTrudy().getTrudyId()
+                +"//"+s.getReply())
         );
 
         model.addAttribute("data" , list);
+
 
     }
 
@@ -62,7 +71,18 @@ public class MainServiceImpl implements MainService {
         }
     }
 
+    @Override
+    public void addReply(MainReply dto) {
+        replyRepo.save(dto);
+    }
 
+    @Override
+    public List<MainReply> getReplyList() {
+        List<MainReply> list = replyRepo.findAll();
+        list.forEach(s -> System.out.println(s.getBoard().getBoardId()));
+        System.out.println("list :: " +list.toString());
+        return replyRepo.findAll();
+    }
 
 
 }

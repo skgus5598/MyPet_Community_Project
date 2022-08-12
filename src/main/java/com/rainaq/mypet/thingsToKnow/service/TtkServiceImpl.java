@@ -1,28 +1,34 @@
 package com.rainaq.mypet.thingsToKnow.service;
 
+import com.rainaq.mypet.common.boardCategory.BoardCategory;
+import com.rainaq.mypet.common.imgFiles.FileService;
 import com.rainaq.mypet.thingsToKnow.entity.TtkBoard;
 import com.rainaq.mypet.thingsToKnow.mapper.TtkMapper;
 import com.rainaq.mypet.thingsToKnow.repository.TtkRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class TtkServiceImpl implements TtkService {
 
     @Autowired
     TtkMapper mapper;
-
     @Autowired
     TtkRepository repo;
 
+    private final FileService fileService;
 
     @Override
     public void insertForm(MultipartFile file, TtkBoard dto) {
@@ -41,12 +47,13 @@ public class TtkServiceImpl implements TtkService {
         dbFileName += filename;
 
         dto.setImgName(dbFileName);
-        mapper.insertBoard(dto);
+    //    mapper.insertBoard(dto);
+        repo.save(dto);
     }
 
     @Override
     public List<TtkBoard> getAllList() {
-        List<TtkBoard> list =  repo.findAll();
+        List<TtkBoard> list =  repo.findAll(Sort.by(Sort.Direction.DESC,"boardId"));
         return list;
 
     }
@@ -58,8 +65,21 @@ public class TtkServiceImpl implements TtkService {
     }
 
     @Override
-    public List<TtkBoard> getMenuList(int categoryId) {
-        return repo.findAllByCategoryId(categoryId);
+    public List<TtkBoard> getMenuList(BoardCategory category) {
+        return repo.findAllByCategory(category);
+    }
+
+    @Override
+    @Transactional
+    public String deleteBoard(int boardId, String imgName) {
+        fileService.deleteImage(imgName);
+        int result = repo.deleteByBoardId(boardId);
+        if(result == 1){
+            return "{\"result\" : true}";
+        }else{
+            return"{\"result\" : false}";
+        }
+
     }
 
 
