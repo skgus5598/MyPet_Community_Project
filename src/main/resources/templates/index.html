@@ -26,22 +26,26 @@
     }
 
     function delStory(boardId, imgName) {
-        $.ajax({
-            url: "/newStory/deleteBoard?boardId=" + boardId + "&imgName=" + imgName,
-            type: "DELETE",
-            dataType: "JSON",
-            success: function (data) {
-                if (data.result == true) {
-                    alert("delete success");
-                    location.href = "/newStory/main";
-                } else {
-                    alert("delete fail")
+        if(!confirm("정말 삭제하시겠습니까?")) {
+            return false;
+        }else{
+            $.ajax({
+                url: "/newStory/deleteBoard?boardId=" + boardId + "&imgName=" + imgName,
+                type: "DELETE",
+                dataType: "JSON",
+                success: function (data) {
+                    if (data.result == true) {
+                        alert("delete success");
+                        location.href = "/newStory/main";
+                    } else {
+                        alert("delete fail")
+                    }
+                },
+                error: function () {
+                    alert("server - fail");
                 }
-            },
-            error: function () {
-                alert("server - fail");
-            }
-        })
+            })
+        }
     };
 </script>
 
@@ -49,7 +53,6 @@
         <article class="trudyImage" style="width: 70%; background-color: #99cfe5">
             <header class="entry-header">
                 <div class="entry-thumbnail" style="display: flex">
-                    <div>[[${i.count}]] &nbsp;</div>
                     <div>
                         <a th:href="@{#}"> <!-- mainImage가 들어가야함(제일 첫번째 이미지파일이름) -->
                             <img th:id="imageSite+${i.count}" style="width: 400px; height: 300px"
@@ -61,16 +64,15 @@
             </header>
         </article>
         <article>
-            <header class="entry-header">
-                <div class="entry-thumbnail">
+            <header>
+                <div >
                     <h2 class="entry-title"><a th:href="@{#}" rel="bookmark"></a></h2>
-                    <a class='portfoliotype' href='#'>[[*{list.userId}]]</a>
-                    <a class='portfoliotype' href='portfolio-category.html'>Golden Retriever </a>
+                    <a href='#'> @[[*{list.user.userId}]] / [[${list.trudy.trudyName}]]</a>
+                    <br>
+                    <label th:text="${list.content}"/><br>
                     <button type="button"
                             th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE
                     </button>
-                    <br>
-                    <label th:text="${list.content}"/><br><br>
                     <div style="display: flex">
                         <input type="text" placeholder="Add Comment ..">
                         <input type="submit">

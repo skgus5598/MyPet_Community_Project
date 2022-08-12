@@ -30,6 +30,12 @@ public class MainServiceImpl implements MainService {
 
     public void getList(Model model){
         List<MainBoard> list = repository.findAll(Sort.by(Sort.Direction.DESC,"boardId"));
+        // list 찍어보기
+
+        list.forEach(s ->
+                System.out.println("trudy id :: "+ s.getTrudy().getTrudyName() +"//"+s.getUser().getUserId() +"// " + s.getTrudy().getTrudyId())
+        );
+
         model.addAttribute("data" , list);
 
     }
@@ -39,8 +45,8 @@ public class MainServiceImpl implements MainService {
 
         String imgName = fileService.insertImgs(files);
         dto.setImgName(imgName);
-
-        mapper.insertBoard(dto);
+        repository.save(dto);
+    //    mapper.insertBoard(dto);
     }
 
     @Override

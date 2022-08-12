@@ -9,4 +9,5 @@ import java.util.List;
 public interface MyPageRepository extends JpaRepository<Trudy, Integer> {
 
     List<Trudy> findAllByUser(UserEntity userId);
+
 }

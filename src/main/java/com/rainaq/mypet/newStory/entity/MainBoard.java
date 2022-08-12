@@ -1,11 +1,16 @@
 package com.rainaq.mypet.newStory.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.rainaq.mypet.myPage.entity.Trudy;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -22,16 +27,21 @@ public class MainBoard {
 
     private String content;
 
-    @Column(name = "user_id")
-    private String userId;
+    @OneToOne
+    @JoinColumn(name = "user_id") // fk
+    private UserEntity user;
 
-    @Column(name = "trudy_id")
-    private String trudyId;
+    @OneToOne
+    @JoinColumn(name = "trudy_id") // fk
+    private Trudy trudy;
 
     @Column(name = "img_name")
     private String imgName;
 
     @Column(name = "like_no")
+    @ColumnDefault("0") // default value = 0
     private int likeNo;
+
+
 
 }

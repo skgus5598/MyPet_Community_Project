@@ -5,9 +5,14 @@
 
 <th:block layout:fragment="content">
     <style>
-        .detail_img {   width: 50px;}
+        .detail_img {
+            width: 50px;
+        }
 
-        .imgMain {  width: 400px;  height: 450px;}
+        .imgMain {
+            width: 400px;
+            height: 450px;
+        }
 
     </style>
 
@@ -23,6 +28,30 @@
                 }
             }
         }
+
+        function getCategory() {
+            $("#myTrudyList2").show();
+            $.ajax({
+                url: "/myPage/getTrudyList",
+                type: "GET",
+                dataType: "JSON",
+                success: function (list) {
+                    console.log(list);
+                    var html = "";
+                    html += "<option value=''> == SELECT TRUDY == </option>"
+                    list.forEach(function (data){
+                        html += "<option value='" + data.trudyId + " '>" + data.trudyName + "</option>" //selected 옵션 넣기
+                    })
+                    $("#myTrudyList2").html(html);
+                },
+                error: function () {
+                    alert("오류발생");
+                }
+            });
+        };
+
+
+
     </script>
 
     <form th:action="@{/newStory/insertForm}" th:method="post" enctype="multipart/form-data">
@@ -35,10 +64,14 @@
             </a>
         </div>
         <div>
-            <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
-            <input type="hidden" th:name="userId" th:value="test123">
-            <a class='portfoliotype' href='#'>sunshimi</a>
-            <a class='portfoliotype' href='#'>Golden Retriever </a>
+            <h2 class="entry-title"><a href="#" rel="bookmark">@[[${session.loginUser}]]</a></h2>
+            <input type="hidden" th:name="user" th:value="${session.userId}">
+
+            <a id="myTrudyList" th:onclick="getCategory()" >SELECT MY TRUDY!! (click) </a> <br>
+
+            <select id="myTrudyList2" style="display: none" th:name="trudy" />
+
+
             <textarea th:name="content" placeholder="write here!"></textarea>
             <input type="submit" th:value="register">
         </div>
