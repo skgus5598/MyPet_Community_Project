@@ -43,7 +43,7 @@ public class MainBoard {
     @ColumnDefault("0") // default value = 0
     private int likeNo;
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<MainReply> reply;
 
 
