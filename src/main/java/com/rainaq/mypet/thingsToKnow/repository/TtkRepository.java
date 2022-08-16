@@ -2,6 +2,7 @@ package com.rainaq.mypet.thingsToKnow.repository;
 
 import com.rainaq.mypet.common.boardCategory.BoardCategory;
 import com.rainaq.mypet.thingsToKnow.entity.TtkBoard;
+import com.rainaq.mypet.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface TtkRepository extends JpaRepository<TtkBoard,Integer> {
     List<TtkBoard> findAllByCategory(BoardCategory category);
 
     int deleteByBoardId(int boardId);
+
+    List<TtkBoard> findAllByUser(UserEntity user);
 }

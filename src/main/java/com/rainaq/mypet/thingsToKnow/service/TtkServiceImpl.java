@@ -5,6 +5,7 @@ import com.rainaq.mypet.common.imgFiles.FileService;
 import com.rainaq.mypet.thingsToKnow.entity.TtkBoard;
 import com.rainaq.mypet.thingsToKnow.mapper.TtkMapper;
 import com.rainaq.mypet.thingsToKnow.repository.TtkRepository;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -80,6 +81,11 @@ public class TtkServiceImpl implements TtkService {
             return"{\"result\" : false}";
         }
 
+    }
+
+    @Override
+    public List<TtkBoard> getMyTtkList(UserEntity user) {
+       return repo.findAllByUser(user);
     }
 
 

@@ -2,6 +2,8 @@ package com.rainaq.mypet.talkTalk.service;
 
 import com.rainaq.mypet.talkTalk.entity.TalkBoard;
 import com.rainaq.mypet.talkTalk.repository.TalkRepository;
+import com.rainaq.mypet.thingsToKnow.entity.TtkBoard;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -33,5 +35,10 @@ public class TalkServiceImpl implements TalkService {
     public void boardDetail(Model model, int boardId) {
         TalkBoard dto = repo.findByBoardId(boardId);
         model.addAttribute("dto", dto);
+    }
+
+    @Override
+    public List<TalkBoard> getMyTalkList(String userId) {
+        return repo.findAllByUserId(userId);
     }
 }

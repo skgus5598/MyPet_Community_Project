@@ -31,6 +31,9 @@ public class MyPageController {
         return "myPage/myPage_trudy";
     }
 
+    @GetMapping("myBoard")
+    public String myBoard() { return "myPage/myPage_board";}
+
     @GetMapping("getTrudyList")
     @ResponseBody
     public List<Trudy> getTrudyList(HttpSession session){
@@ -62,6 +65,7 @@ public class MyPageController {
         user.setUserId(str);
         return mpService.getAllMyStoryList(user);
     }
+
 
 
 }

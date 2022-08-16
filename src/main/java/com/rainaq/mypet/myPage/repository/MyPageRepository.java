@@ -10,4 +10,5 @@ public interface MyPageRepository extends JpaRepository<Trudy, Integer> {
 
     List<Trudy> findAllByUser(UserEntity userId);
 
+
 }

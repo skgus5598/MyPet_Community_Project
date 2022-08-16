@@ -16,4 +16,6 @@ public interface MyPageService {
     void delTrudy(int trudyId, String imgName);
 
     List<MainBoard> getAllMyStoryList(UserEntity user);
+
+
 }

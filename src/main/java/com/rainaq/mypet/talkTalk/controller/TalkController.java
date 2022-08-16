@@ -3,20 +3,21 @@ package com.rainaq.mypet.talkTalk.controller;
 import com.rainaq.mypet.common.imgFiles.FileService;
 import com.rainaq.mypet.talkTalk.entity.TalkBoard;
 import com.rainaq.mypet.talkTalk.service.TalkServiceImpl;
+import com.rainaq.mypet.thingsToKnow.entity.TtkBoard;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -59,5 +60,12 @@ public class TalkController {
         return "talkTalk/talkDetail";
     }
 
-
+    @GetMapping("getMyTalkList")
+    @ResponseBody
+    public List<TalkBoard> getMyTalkList(HttpSession session){
+        String str = (String)session.getAttribute("userId");
+        UserEntity user = new UserEntity();
+        user.setUserId(str);
+        return talkService.getMyTalkList(user.getUserId());
+    }
 }

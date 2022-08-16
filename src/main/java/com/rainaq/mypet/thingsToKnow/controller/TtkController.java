@@ -4,6 +4,7 @@ import com.rainaq.mypet.common.boardCategory.BoardCategory;
 import com.rainaq.mypet.common.boardCategory.CategoryRepo;
 import com.rainaq.mypet.thingsToKnow.entity.TtkBoard;
 import com.rainaq.mypet.thingsToKnow.service.TtkServiceImpl;
+import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -68,6 +70,15 @@ public class TtkController {
     @ResponseBody
     public String deleteBoard(@RequestParam int boardId, @RequestParam String imgName ){
         return tService.deleteBoard(boardId, imgName);
+    }
+
+    @GetMapping("getMyTtkList")
+    @ResponseBody
+    public List<TtkBoard> getMyTtkList(HttpSession session){
+        String str = (String)session.getAttribute("userId");
+        UserEntity user = new UserEntity();
+        user.setUserId(str);
+        return tService.getMyTtkList(user);
     }
 
 

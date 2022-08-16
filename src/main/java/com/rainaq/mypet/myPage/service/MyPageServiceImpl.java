@@ -59,4 +59,5 @@ public class MyPageServiceImpl implements MyPageService{
     public List<MainBoard> getAllMyStoryList(UserEntity user) {
         return userRepo.findAllByUser(user);
     }
+
 }
