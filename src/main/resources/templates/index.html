@@ -68,10 +68,8 @@
     var replyBool = true;
     function showReply(boardId){
         if(replyBool == true){
-            $("#showReply").show();
-            $("#showReply").animate({height: '30%'});
-
-
+            $("#showReply"+boardId).show();
+            $("#showReply"+boardId).animate({height: '30%'});
 
             $.ajax({
                 url : "/newStory/getAllReply?board="+boardId,
@@ -82,27 +80,27 @@
                     html += "<table>";
                     list.forEach((data)=>{
                         console.log(JSON.stringify(data));
+                        insertDate = new Date(data.insertDate).toLocaleDateString();  // ex) 2022.08.16
+           //           insertDate = new Date(data.insertDate).toLocaleString();   ex) 2022.08.16. 오후 3:15:30
                         html +="<tr>";
                         html +="<td>"+data.repUserId+"</td>";
                         html +="<td>"+data.repContent+"</td>";
+                        html +="<td>"+insertDate+"</td>"
                         html +="</tr>";
                     })
                     html +="</table>";
-                    $("#showReply").html(html);
+                    $("#showReply"+boardId).html(html);
                     replyBool = false;
                 }, error : function (){
                     alert("server error");
                 }
             })
         }else{
-            $("#showReply").hide();
+            $("#showReply"+boardId).hide();
             replyBool = true;
         }
 
     }
-
-
-
 
 </script>
 
@@ -131,9 +129,9 @@
                             th:onclick="delStory([[${list.boardId}]], [[${list.imgName}]])">DELETE
                     </button>
                     <div>
-                        <button th:onclick="showReply([[${list.boardId}]])">댓글 펼치기</button>
+                        <button th:onclick="showReply([[${list.boardId}]])">SHOW REPLY</button>
                     </div>
-                    <div id="showReply" ></div>
+                    <div th:id="showReply+${list.boardId}" ></div>
                     <div style="display: flex">
                         <input id="repContent" th:type="text" placeholder="Add Comment ..">
                         <button th:type="button" th:onclick="addReply([[${list.boardId}]])">댓글등록</button>

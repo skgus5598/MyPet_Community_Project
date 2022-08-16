@@ -2,6 +2,7 @@ package com.rainaq.mypet.myPage.controller;
 
 import com.rainaq.mypet.myPage.entity.Trudy;
 import com.rainaq.mypet.myPage.service.MyPageServiceImpl;
+import com.rainaq.mypet.newStory.entity.MainBoard;
 import com.rainaq.mypet.user.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,15 @@ public class MyPageController {
     @ResponseBody
     public void addTrudyForm(@RequestParam("file") MultipartFile file, Trudy dto, HttpSession session ){
         mpService.insertForm(file, dto, session);
+    }
 
+    @GetMapping("getAllMyStoryList")
+    @ResponseBody
+    public List<MainBoard> getAllMyStoryList(HttpSession session){
+        String str = (String)session.getAttribute("userId");
+        UserEntity user = new UserEntity();
+        user.setUserId(str);
+        return mpService.getAllMyStoryList(user);
     }
 
 

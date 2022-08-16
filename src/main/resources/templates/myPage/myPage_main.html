@@ -5,47 +5,44 @@
 
 <th:block layout:fragment="content">
     <th:block th:replace="/layout/fragments/myPage :: myPageFragment"/>
-    <!-- 반복문 돌리기? 3줄씩 끊어서-->
+
+    <script>
+        //즉시실행함수
+        $(function () {
+            $.ajax({
+                url : "/myPage/getAllMyStoryList",
+                type : "GET",
+                success : function (list){
+                    console.log(list);
+                    var html = "";
+                    list.forEach((data)=>{
+                        insertDate = new Date(data.insertDate).toLocaleDateString();  // ex) 2022.08.16
+
+                        html += "<div class='sContents'>"
+                        html += "<a href='#'>";
+                        html += "<img src='/files/download?files="+data.imgName+"'><br>";
+                        html += "<label>"+data.trudy.trudyName+"&nbsp;<br></label>"
+                        html += "<label style='text-align: right'>♥"+data.likeNo+"&nbsp;</label>";
+                        html += "<label>▒"+data.reply.length+"</label><br>";
+                        html +=  insertDate;
+                        html += "</a></div>";
+                    });
+                    $(".story-contents").html(html);
+                }, error : function (){
+                    alert("server-fail");
+                }
+            })
+        })
+
+    </script>
+
     <div class="story-contents">
         <div class="sContents">
-            <a href="#">
-                <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                <label>❤️ 24 ♥sunshimi ♥hodor </label>
-            </a>
+
             <br><br>
         </div>
 
-        <div class="sContents">
-            <a href="#">
-                <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                <label>❤️ 24 ♥sunshimi ♥hodor </label>
-            </a>
-            <br><br>
-        </div>
 
-        <div class="sContents">
-            <a href="#">
-                <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                <label>❤️ 24 ♥sunshimi ♥hodor </label>
-            </a>
-            <br><br>
-        </div>
-
-        <div class="sContents">
-            <a href="#">
-                <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                <label>❤️ 24 ♥sunshimi ♥hodor </label>
-            </a>
-            <br><br>
-        </div>
-
-        <div class="sContents">
-            <a href="#">
-                <img src="https://i.pinimg.com/736x/34/5c/df/345cdf0b5c4b2e6324f731b7b161698b.jpg"><br>
-                <label>❤️ 24 ♥sunshimi ♥hodor </label>
-            </a>
-            <br><br>
-        </div>
     </div>
 
 </th:block>

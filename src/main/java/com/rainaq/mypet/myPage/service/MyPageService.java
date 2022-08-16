@@ -1,6 +1,7 @@
 package com.rainaq.mypet.myPage.service;
 
 import com.rainaq.mypet.myPage.entity.Trudy;
+import com.rainaq.mypet.newStory.entity.MainBoard;
 import com.rainaq.mypet.user.entity.UserEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,4 +14,6 @@ public interface MyPageService {
     List<Trudy> getList(UserEntity userId);
 
     void delTrudy(int trudyId, String imgName);
+
+    List<MainBoard> getAllMyStoryList(UserEntity user);
 }

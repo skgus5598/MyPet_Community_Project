@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -42,6 +43,9 @@ public class MainBoard {
     @Column(name = "like_no")
     @ColumnDefault("0") // default value = 0
     private int likeNo;
+
+    @Column(name = "insert_date")
+    private Date insertDate;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<MainReply> reply;

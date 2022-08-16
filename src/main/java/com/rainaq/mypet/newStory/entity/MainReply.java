@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -33,6 +34,8 @@ public class MainReply {
     @Column(name = "rep_content")
     private String repContent;
 
+    @Column(name = "insert_date")
+    private Date insertDate;
 
 
 
