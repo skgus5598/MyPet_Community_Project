@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@DynamicInsert //insert시 null인 필드를 제외시킨다.
+
 @Table(name = "main_board")
 public class MainBoard {
 

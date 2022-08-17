@@ -43,7 +43,7 @@
         </div>
         <div>
             <h2 class="entry-title"><a href="#" rel="bookmark">@sunshimMom</a></h2>
-            <input type="text" th:name="userId" th:value="test123" th:readonly="test123"><br>
+            <input type="text" th:name="userId" th:value="${session.userId}" th:readonly="${session.userId}"><br>
             <input type="text" th:name="boardTitle" placeholder="제목을 입력하세요"><br>
             <textarea th:name="boardContent" placeholder="write here!"></textarea>
             <input type="submit" th:value="register">

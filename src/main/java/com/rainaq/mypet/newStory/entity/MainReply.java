@@ -2,6 +2,7 @@ package com.rainaq.mypet.newStory.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,6 +15,8 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@DynamicInsert //insert시 null인 필드를 제외시킨다.
+
 @Table(name = "main_board_reply")
 public class MainReply {
 

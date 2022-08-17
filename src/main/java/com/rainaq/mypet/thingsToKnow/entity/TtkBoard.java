@@ -6,14 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@DynamicInsert //insert시 null인 필드를 제외시킨다.
 @Table(name="board_one")
 public class TtkBoard {
 
@@ -45,6 +48,8 @@ public class TtkBoard {
     @Column(name="hit_no")
     private int hitNo;
 
+    @Column(name = "insert_date")
+    private Date insertDate;
 
 
 }

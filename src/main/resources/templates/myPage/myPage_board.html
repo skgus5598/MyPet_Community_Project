@@ -10,7 +10,7 @@
         //즉시실행함수
         $(function (){
             getMyTalkList();
-        //    getMyTtkList();
+            getMyTtkList();
         })
 
         function getMyTtkList(){
@@ -19,7 +19,7 @@
                 type : "GET",
                 success : function (list){
                     console.log("getMyTtkList : " + JSON.stringify(list));
-                    makeTable(list)
+                    makeTtkTable(list)
                 }, error : function (){
 
                 }
@@ -32,54 +32,68 @@
                 type : "GET",
                 success : function (list){
                     console.log("getMyTalkList : " + JSON.stringify(list));
-                    makeTable(list)
+                    makeTalkTable(list)
                 }, error : function (){
 
                 }
             })
         }
 
-        function makeTable(list){
+        function makeTtkTable(list){
             var html = '';
             html += "<table>";
             list.forEach((data)=>{
+                insertDate = new Date(data.insertDate).toLocaleDateString();  // ex) 2022.08.16
                 html += "<tr>";
                 html += "<td>";
-                html += "<label>"+data.boardTitle+"</label>"
-                html =+ "</td>"
+                html += "<label>"+data.boardId+"&nbsp;</label>";
+                html += "<label><a href='/ttk/boardDetail?boardId="+data.boardId+"'>"+data.boardTitle+"&nbsp;</a></label>";
+                html += "<label>♥ "+data.likeNo+"&nbsp;</label>";
+                html += "<label>▒ "+data.hitNo+"&nbsp;</label>";
+                html += "<label>"+insertDate+"</label>";
+                html += "</td>"
                 html += "</tr>";
             });
-
             html += "</table>";
+            $("#ttkTable").html(html);
+        }
 
-     //       $("#ttkTable").html(html);
+        function makeTalkTable(list){
+            var html = '';
+            html += "<table>";
+            list.forEach((data)=>{
+                insertDate = new Date(data.insertDate).toLocaleDateString();  // ex) 2022.08.16
+                html += "<tr>";
+                html += "<td>";
+                html += "<label>"+data.boardId+"&nbsp;</label>";
+                html += "<label><a href='/talk/boardDetail?boardId="+data.boardId+"'>"+data.boardTitle+"&nbsp;</a></label>";
+                html += "<label>♥ "+data.likeNo+"&nbsp;</label>";
+                html += "<label>▒ "+data.hitNo+"&nbsp;</label>";
+                html += "<label>"+insertDate+"</label>";
+                html += "</td>"
+                html += "</tr>";
+            });
+            html += "</table>";
             $("#talkTable").html(html);
         }
+
+
 
     </script>
 
     <span>
         <h1>Things To Know</h1>
-        <hr>
-        <div th:id="ttkTable"/>
+        <div th:id="ttkTable"> </div>
 
     </span>
     <span>
         <h1>Talk Talk</h1>
-        <hr>
-        <div th:id="talkTable"/>
+        <div th:id="talkTable"> </div>
 
     </span>
     <span>
         <h1>Sharing Info</h1>
-        <hr>
         <table>
-            <tr>
-                <td>What's wrong with my TRUDY!?</td>
-                <td>❤️ 24</td>
-                <td># 24</td>
-                <td>2022-01-01</td>
-            </tr>
             <tr>
                 <td>What's wrong with my TRUDY!?</td>
                 <td>❤️ 24</td>

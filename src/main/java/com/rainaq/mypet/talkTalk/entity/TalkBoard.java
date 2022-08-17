@@ -8,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="board_two")
@@ -42,6 +43,9 @@ public class TalkBoard {
     @ColumnDefault("0")
     @Column(name="hit_no")
     private int hitNo;
+
+    @Column(name = "insert_date")
+    private Date insertDate;
 
 
 }
