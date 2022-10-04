@@ -1,0 +1,25 @@
+/* To Do List */
+
+// Entirely//
+o 검색기능 ( 작성자 , 제목 , 내용 , 제목+내용 )
+o Thinkgs To know 에 정렬 ( 조회수 / 좋아요 / 최신 )
+
+
+// New Story //
+o New Story 메인에 댓글 이상 --> repContent내용이 안담긴다 ?
+o 로그인한 userId와 작성자 id가 동일하면 delete 버튼 활성
+o @userId / trudyname 링크 클릭하면 해당 유저의 mypage의 story로 이동, trudy도 볼 수 잇음 (board 제외)
+o 좋아요 기능 추가
+
+// My Page//
+o 좋아요, 댓글 수 확인
+o MOD, DEL 버튼 활성화
+o 댓글 관리 - 삭제버튼 추가
+
+// Things To Know //
+o 좋아요, 조회수 추가
+o detail에 작성자 닉네임 클릭하면 해당 유저의 mypage 스토리로 이동, 트루디도 볼 수 있겡
+
+// TALK TALK //
+o 좋아요, 조회수 추가
+

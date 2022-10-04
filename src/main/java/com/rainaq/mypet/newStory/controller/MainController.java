@@ -61,6 +61,7 @@ public class MainController {
     @PostMapping(value = "addReply", produces = "application/json;charset=utf-8")
     @ResponseBody
     public void addReply(HttpSession session, MainReply dto){
+        log.info("##### dto ::: " + dto.getRepContent() +"// boardId :: " + dto.getBoard() );
         dto.setRepUserId((String)session.getAttribute("userId"));
         mainService.addReply(dto);
     }

@@ -49,6 +49,8 @@
     };
 
     function addReply(boardId){
+        console.log("board :: " + boardId);
+        console.log("repContent :: " + $("#repContent").val());
         $.ajax({
             url : "/newStory/addReply",
             type : "POST",
@@ -58,7 +60,7 @@
             },
             success : function (){
                 alert("success")
-                showReply();
+                showReply(boardId);
             },error : function (){
                 alert("server--error");
             }
@@ -139,7 +141,7 @@
                     </div>
                     <div th:id="showReply+${list.boardId}" ></div>
                     <div style="display: flex">
-                        <input id="repContent" th:type="text" placeholder="Add Comment .." style="width: 100%; height: 60%">
+                        <input th:id="repContent" th:name="repContent" th:type="text" placeholder="Add Comment .." style="width: 100%; height: 60%">
                         <button th:type="button" th:onclick="addReply([[${list.boardId}]])">ㅇ</button>
                     </div>
                 </div>
