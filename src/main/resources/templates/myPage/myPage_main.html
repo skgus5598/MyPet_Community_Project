@@ -16,15 +16,12 @@
                     console.log(list);
                     var html = "";
                     list.forEach((data)=>{
-                        insertDate = new Date(data.insertDate).toLocaleDateString();  // ex) 2022.08.16
-
                         html += "<div class='sContents'>"
-                        html += "<a href='#'>";
+                        html += "<a href='/newStory/storyDetail?boardId="+data.boardId+"'>";
                         html += "<img src='/files/download?files="+data.imgName+"'><br>";
                         html += "<label>"+data.trudy.trudyName+"&nbsp;<br></label>"
                         html += "<label style='text-align: right'>♥"+data.likeNo+"&nbsp;</label>";
                         html += "<label>▒"+data.reply.length+"</label><br>";
-                        html +=  insertDate;
                         html += "</a></div>";
                     });
                     $(".story-contents").html(html);
@@ -37,13 +34,10 @@
     </script>
 
     <div class="story-contents">
-        <div class="sContents">
-
-            <br><br>
-        </div>
-
-
+        <div class="sContents"> <br><br> </div>
     </div>
+
+
 
 </th:block>
 </html>

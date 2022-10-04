@@ -16,4 +16,6 @@ public interface MainService {
     void addReply(MainReply dto);
 
     List<MainReply> getReplyList(MainBoard board);
+
+    void getStoryDetail(int boardId, Model model);
 }

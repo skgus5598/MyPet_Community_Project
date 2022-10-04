@@ -30,8 +30,14 @@ public class MainController {
     public String mainPage(Model model){
         mainService.getList(model);
         return "index";
-
     }
+
+    @GetMapping("storyDetail")
+    public String  storyDetail(@RequestParam int boardId, Model model){
+        mainService.getStoryDetail(boardId, model);
+        return "myPage/myPage_storyDetail";
+    }
+
 
     @GetMapping("addForm")
     public String main_addForm(){

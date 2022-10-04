@@ -34,15 +34,11 @@ public class MainServiceImpl implements MainService {
 
     public void getList(Model model){
         List<MainBoard> list = repository.findAll(Sort.by(Sort.Direction.DESC,"boardId"));
+
+
         // list 찍어보기
 
-        list.forEach(s ->
-                System.out.println("trudy id :: "
-                        + s.getTrudy().getTrudyName()
-                        +"//"+s.getUser().getUserId()
-                        +"// " + s.getTrudy().getTrudyId()
-                +"//"+s.getReply())
-        );
+
 
         model.addAttribute("data" , list);
 
@@ -82,6 +78,13 @@ public class MainServiceImpl implements MainService {
         list.forEach(s -> System.out.println(s.getBoard().getBoardId()));
         System.out.println("list :: " +list.toString());
         return replyRepo.findAllByBoard(board);
+    }
+
+    @Override
+    public void getStoryDetail(int boardId, Model model) {
+        MainBoard dto = repository.findByBoardId(boardId);
+        model.addAttribute("dto" , dto);
+        System.out.println("dto : " + dto.getUser());
     }
 
 
